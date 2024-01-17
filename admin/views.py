@@ -4,4 +4,6 @@ from django.http import HttpResponse
 def admin(request):
     return HttpResponse("Hello World")
 def index(request):
-    return HttpResponse("OWN AMENITY")
+    return HttpResponse(render(request,'home.html'))
+def login(request):
+    return HttpResponse(render(request,'login.html'))

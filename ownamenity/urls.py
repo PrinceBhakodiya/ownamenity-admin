@@ -21,4 +21,5 @@ from admin.views import *
 urlpatterns = [
     path('', index),
     path('admin/', admin),
+       path('admin/login', login),
 ]
