@@ -4,7 +4,9 @@
     </head>
     <body>
         <h1>OwnAmenity</h1>
-        <h1>Login</h1>
-        <h1>Register</h1>
+        Home
+        {% for ad in admin %}
+       <h3> welcome {{ad.name}}</h3>
+        {% endfor %}
     </body>
 </html>

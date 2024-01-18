@@ -1,19 +1,12 @@
-
-
-<html>
-    <head>
-        <title>OwnAmenity</title>
-        <link rel="stylesheet" href="login.css">
-        <style>
-          @import "compass/css3";
+@import "compass/css3";
 
 body {
-  background-color: #a0a4b1;
+  background-color: #ACAFB8;
   color: #fff;
   font-family: arial, helvetica, sans-serif;
   line-height: 1.4;
   font-size: 0.6em;
-  }
+}
 
 *, *:before, *:after {
   box-sizing: border-box;
@@ -28,17 +21,13 @@ body {
   transform: translateY(-50%) translateX(-50%);
   width: 270px;
   border-radius: 3px;
-  background-color: #3b3d3f;
+  background-color: #272E38;
   overflow: hidden;
   .denied & {
     animation: shake 0.35s normal forwards ease-in-out;
   }
   fieldset {
     border: none;
-  }
-  input{
-    color: #9EA2AB;
-    font-size:small;
   }
   header {
     background-color: #202731;
@@ -73,7 +62,7 @@ body {
       top: 9px;
       left: 8px;
       font-size: 10px;
-      color: #3b3d3f;
+      color: #FC7148;
     }
     &:nth-child(1):before {
       content: "\f007";
@@ -81,10 +70,6 @@ body {
     &:nth-child(2):before {
       content: "\f023";
     }
-  }
-  p{
-    text-align: center;
-    color: red;
   }
   button {
     outline: 0;
@@ -115,28 +100,3 @@ body {
   87% { margin-left: 0 }
   100% { margin-left: 0 }
 }
-        </style>
-    </head>
-    <body>
-    
-<div id="login" class="login-form-container">
-  <header>LOGIN </header>
-  <form method="post" action="login.html">
-    {% csrf_token %}
-    <div class="input-wrapper">
-      <input type="text" placeholder="your@email.com" name="email"/>
-    </div>
-    <div class="input-wrapper" >
-      <input type="password" placeholder="password" name="password"/>
-    </div>
-    <button id="continue" type="submit">login</button>
-    
-  </form>
-
-          {% if error %}
-          <p>{{ error }}</p>
-        {% endif %}
-</div>
-
-</body>
-</html>
