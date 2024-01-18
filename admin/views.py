@@ -5,7 +5,7 @@ from .models import adminModel
 def home(request):
     model = adminModel.objects.all()
     print(model)
-    return HttpResponse("Hello World")
+    return HttpResponse(render(request,'home.html',model))
 def index(request):
     return HttpResponse(render(request,'home.html'))
 def login(request):
