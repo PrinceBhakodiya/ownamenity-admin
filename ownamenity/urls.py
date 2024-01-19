@@ -23,8 +23,8 @@ from admin import views
 urlpatterns = [
     #path('admin/', admin.site.urls),
     path('', index),
-    path('admin/home.html', home),  
-    path('admin/product.html', products , name="products"),
-    path('admin/login.html', login),
+    path('admin', home),  
+    path('admin/product', products , name="products"),
+    path('admin', login),
     path('user/',include('userapp.urls')),
 ]
