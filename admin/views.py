@@ -20,6 +20,7 @@ def login(request):
         if request.method == 'POST':
             email_id = request.POST['email']
             passw = request.POST['password']
+            print(request.POST)
             try:
                 user_instance = adminModel.objects.get(email=email_id)
                 if user_instance.password == passw:
@@ -62,8 +63,8 @@ def add_product(request):
         }
         print(form_data)
     return render(request, 'addproduct.html', {'form': form})
-def delete_product(request, product_id):
-    product = get_object_or_404(productModel, id=product_id)
+def delete_product(request, product_id=None):
+    product = get_object_or_404(productModel, P_id=product_id)
     product.delete()
-    return redirect("Product.html")
+    return redirect("/Product")
 

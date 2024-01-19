@@ -22,7 +22,7 @@
             <td>{{product.P_curstock}}</td>
             <td>{{product.P_rating}}</td>
             <td>{{product.P_desc}}</td>
-            <td><a href="{% url 'delete_product' product_id %}">delate</del></a></td>
+            <td><a href="delete-product/{{product.P_id}}">delate</del></a></td>
         </tr>
         </tbody>
         {%endfor%}
