@@ -1,0 +1,33 @@
+{% extends 'temp.html' %}
+{% block head %}
+
+{% endblock %}
+{% block main %}    
+    <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">name</th>
+            <th scope="col">price</th>
+            <th scope="col">currunt stock</th>
+            <th scope="col">rating</th>
+            <th scope="col">description</th>            
+          </tr>
+        </thead>
+        {%for ap in products%}
+        <tbody>
+          <tr>
+            <td>{{ap.P_name}}</td>
+            <td>{{ap.P_price}}</td>
+            <td>{{ap.P_curstock}}</td>
+            <td>{{ap.P_rating}}</td>
+            <td>{{ap.P_desc}}</td>
+        </tr>
+        </tbody>
+        {%endfor%}
+      </table>
+      
+      <button type="button" class="btn btn-secondary btn-sm"  >
+        <span class="bi-plus-square-fill"></span>
+        <span class="bi bi-plus"></span>&nbsp;Add Product
+    </button>
+{% endblock %}
