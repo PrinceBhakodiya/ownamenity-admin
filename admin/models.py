@@ -57,3 +57,9 @@ class UserModel(models.Model):
     class Meta:
         managed=False
         db_table = 'customer'
+from django import forms
+
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = productModel
+        fields = ['P_name', 'P_desc', 'P_category_id', 'P_curstock', 'P_price', 'P_rating']
