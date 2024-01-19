@@ -1,0 +1,44 @@
+{% extends 'temp.html' %}
+
+{% block main %}
+<h2>Add Product</h2>
+<hr>
+<form method="post" action="{% url 'add_product' %}" style="text-align: center;">
+    {% csrf_token %}
+    
+      
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">P_id</span>
+        &nbsp; <input name="P_id" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default" name="P_name">P_name</span>
+        &nbsp; <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default"name="P_desc">P_desc</span>
+        &nbsp; <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default"name="P_category_id">P_category_id </span>
+        &nbsp; <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default"name="P_curstock">P_curstock</span>
+        &nbsp; <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default"name="P_price"> P_price</span>
+        &nbsp;<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default"name="P_ratingx`">P_rating</span>
+        &nbsp;<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      
+   <button type="submit" class="btn btn-secondary btn-sm" style="height: 50px;width: 200px;color: coral;" >
+        <span class="bi-plus-square-fill"></span>
+        <span class="bi bi-plus"></span>&nbsp;  submit
+    </button>
+</form>
+{% endblock %}
