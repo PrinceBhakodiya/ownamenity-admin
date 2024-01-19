@@ -26,7 +26,6 @@ class productModel(models.Model):
         managed=False
         db_table = 'product'
 
-
 class ordersModel(models.Model):
         # id = models.AutoField(primary_key=True)
     O_id = models.IntegerField(max_length=10,primary_key=True)
@@ -42,7 +41,7 @@ class ordersModel(models.Model):
         managed=False
         db_table = 'orders'
 
-class UserModel(models.Model):
+class CustomerModel(models.Model):
         # id = models.AutoField(primary_key=True)
     Cust_id = models.IntegerField(max_length=10,primary_key=True)
     First_name = models.CharField(max_length=20, null=False)
@@ -57,10 +56,17 @@ class UserModel(models.Model):
     
     class Meta:
         managed=False
-        db_table = 'customer'
-from django import forms
-
-class ProductForm(forms.ModelForm):
-    class Meta:
-        model = productModel
-        fields = ['P_name', 'P_desc', 'P_category_id', 'P_curstock', 'P_price', 'P_rating']
+        db_table = 'customer'  
+    def to_dict(self):
+        return {
+            'cust_id': self.cust_id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'email_id': self.email_id,
+            'contact_no': self.contact_no,
+            'dob': str(self.dob) if self.dob else None,
+            'password': self.password,
+            'address': self.address,
+            'pincode': self.pincode,
+            'profile_pic': self.profile_pic,
+        }
