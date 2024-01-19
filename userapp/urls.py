@@ -12,5 +12,7 @@ urlpatterns = [
     #path('admin/', admin.site.urls),
     path('create',Customerview),
      path('login',LoginView),
-      path('product',ProductView)
+      path('product',ProductView ,name='product_view'),
+        #   path('product?<int:p_id>', ProductView, name='product_detail'),  # <int:p_id> captures the p_id parameter
+
 ]

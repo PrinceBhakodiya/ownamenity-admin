@@ -46,15 +46,26 @@ def LoginView(request):
     return JsonResponse({"msg": "Invalid request method"}, safe=False)
 
 @csrf_exempt
-def ProductView(request):
-   if request.method == "GET":    
-        product_image = productImageModel.objects.all()
-        print(product_image)
-        products = Product.objects.all()
-        serialized_data = [
-            
-            product.to_dict()
-            for product in products
-            
-        ]
-        return JsonResponse(serialized_data, safe=False)
+def ProductView(request,p_id=None):
+   if request.method == "GET":  
+        p_id = request.GET.get('p_id')  
+        if p_id is not None:
+            try:
+                # Try to retrieve the product with the specified p_id
+                product = Product.objects.get(p_id=p_id)
+                serialized_data = product.to_dict()
+                return JsonResponse(serialized_data, safe=False)
+            except Product.DoesNotExist:
+                # Handle the case when the product with the specified p_id does not exist
+                return JsonResponse({'error': 'Product not found'}, status=404)
+        else:        
+            product_image = productImageModel.objects.all()
+            print(product_image)
+            products = Product.objects.all()
+            serialized_data = [
+                
+                product.to_dict()
+                for product in products
+                
+            ]
+            return JsonResponse(serialized_data, safe=False)
