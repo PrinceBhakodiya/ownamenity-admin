@@ -1,0 +1,42 @@
+{% extends 'temp.html' %}
+
+{% block main %}    
+    <table class="table table-dark">
+        <thead style="height: 80px;color: coral;">
+          <tr>
+            <!-- <th scope="col">id</th> -->
+            <th scope="col">Customer id</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email </th>
+            <th scope="col">Contact No</th> 
+            <th scope="col">Dob</th>
+            <th scope="col">Password</th>
+            <th scope="col">Address</th>
+            <th scope="col">Pincode</th>
+            <th scope="col">Profile Pic</th>                        
+          </tr>
+        </thead>
+        <hr>
+        {% for u in user %}
+        <tbody >
+          <tr>
+              <td>{{u.Cust_id}}</td>
+              <td>{{u.First_name}}</td>
+            <td>{{u.Last_name}}</td>
+            <td>{{u.Email_id}}</td>
+            <td>{{u.Contact_no}}</td>
+            <td>{{u.Dob}}</td>
+            <td>{{u.Password}}</td>
+            <td>{{u.Address}}</td>
+            <td>{{u.Pincode}}</td>
+            <td>{{u.Profile_pic}}</td>
+          </tr>
+        </tbody>
+        {%endfor%}
+      </table>
+      <div class="text-center">
+      
+      
+    </div>
+{% endblock %}

@@ -48,7 +48,7 @@ class UserModel(models.Model):
     First_name = models.CharField(max_length=20, null=False)
     Last_name = models.CharField(max_length=20, null=False)
     Email_id = models.CharField(max_length=30, null=False)
-    Contact_no = models.IntegerField(null=False)
+    Contact_no = models.BigIntegerField(null=False)
     Dob = models.DateField(null=True)
     Password = models.CharField(max_length=10, null=False)
     Address = models.CharField(max_length=100, null=True)
@@ -58,9 +58,12 @@ class UserModel(models.Model):
     class Meta:
         managed=False
         db_table = 'customer'
-from django import forms
 
-class ProductForm(forms.ModelForm):
+class ProductImage(models.Model):
+    p_img_id = models.IntegerField(primary_key=True) 
+    p_img_link = models.CharField(max_length=200)
+    p_id = models.IntegerField(max_length=10) 
+    
     class Meta:
-        model = productModel
-        fields = ['P_name', 'P_desc', 'P_category_id', 'P_curstock', 'P_price', 'P_rating']
+            managed=False
+            db_table = 'product_image' 
