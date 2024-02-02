@@ -68,7 +68,7 @@ def add_product(request):
             return render(request,'Product.html',{"msg":"Product Inserted Successfully"})
         except Exception as e:
             print(e)
-    return render(request, 'addproduct.html')
+    return render(request, 'addProduct.html')
 def delete_product(request, product_id):
     product = get_object_or_404(productModel, P_id=product_id)
     product.delete()
@@ -76,13 +76,11 @@ def delete_product(request, product_id):
 
 def edit_product(request,product_id):
      if request.method == 'GET':
-                     data=   productModel.objects.get(P_id=product_id)
-                     return render(request,'editProduct.html',{"data":data})
+        data= productModel.objects.get(P_id=product_id)
+        return render(request,'editProduct.html',{"data":data})
 
-     
      if request.method == 'POST':
         P_id = request.POST['P_id']
-       
         p_name = request.POST['name']
         P_desc = request.POST['P_desc']
         P_category_id = request.POST['P_category_id']
@@ -103,3 +101,22 @@ def edit_product(request,product_id):
         except Exception as e:
             print(e)
      return redirect(request, 'product')
+
+def category(request):
+    category = CategoryModel.objects.all()
+    return HttpResponse(render(request,'category.html',{"category":category}))
+def add_Category(request):
+     if request.method == 'POST':
+        c_id = request.POST['C_id']
+        c_name = request.POST['C_name']
+        try:
+            category= CategoryModel.objects.create(Cate_id=c_id,Cate_name=c_name)
+            category.save()
+             
+            
+            category.save()
+            return render(request,'category.html',{"msg":"category Inserted Successfully"})
+        except Exception as e:
+            print(e)
+     return render(request, 'addCategory.html')
+
