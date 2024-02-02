@@ -65,7 +65,7 @@ def add_product(request):
                                                  ,P_rating=P_rating
                                                )
             product.save()
-            return render(request,'Product.html',{"msg":"Product Inserted Successfully"})
+            return products(request)
         except Exception as e:
             print(e)
     return render(request, 'addProduct.html')
@@ -110,12 +110,9 @@ def add_Category(request):
         c_id = request.POST['C_id']
         c_name = request.POST['C_name']
         try:
-            category= CategoryModel.objects.create(Cate_id=c_id,Cate_name=c_name)
-            category.save()
-             
-            
-            category.save()
-            return render(request,'category.html',{"msg":"category Inserted Successfully"})
+            categor= CategoryModel.objects.create(Cate_id=c_id,Cate_name=c_name)
+            categor.save()
+            return category(request)
         except Exception as e:
             print(e)
      return render(request, 'addCategory.html')

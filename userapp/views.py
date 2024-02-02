@@ -19,7 +19,6 @@ def Customerview(request):
             email_id=data['email'],
             contact_no=data['contact_no'],
             password=data['password']
-            # Add other fields here
         )
         return JsonResponse({"customer": new_customer.to_dict(),"msg":"Registered Success"}, safe=False)
 
