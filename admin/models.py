@@ -138,7 +138,7 @@ class CategoryModel(models.Model):
     Cate_id = models.IntegerField(primary_key=True)
     Cate_name = models.CharField(max_length=200)
 
-    class Meta:
+    class Meta: 
         managed=False
         db_table= 'category'
 class OrderProduct(models.Model):
