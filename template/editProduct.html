@@ -1,0 +1,57 @@
+{% extends 'temp.html' %}
+
+{% block main %}
+{% if msg %}
+      <script>
+    alert("{{msg}}");
+    </script>
+{% endif %}
+<h2>Edit Product</h2>
+<hr>
+<form method="post" action="" style="text-align: center;">
+    {% csrf_token %} 
+    <!-- {{data.P_id}} -->
+      
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">P_id</span>
+        &nbsp; <input name="P_id"readonly value="{{data.P_id}}"  type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default" >P_name</span>
+        &nbsp; <input name="name" value="{{data.P_name}}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">P_desc</span>
+        &nbsp; <input name="P_desc" value="{{data.P_desc}}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">category</span>
+        &nbsp;<select name="P_category_id" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+          {% for category in categories %}
+            <option value="{{ category.Cate_id }}">{{ category.Cate_name}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">image</span>
+        &nbsp; <input name="P_image" value="" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">P_curstock</span>
+        &nbsp; <input name="P_curstock" value="{{data.P_curstock}}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default"> P_price</span>
+        &nbsp;<input name="P_price" value="{{data.P_price}}"  type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">P_rating</span>
+        &nbsp;<input name="P_rating" value="{{data.P_rating}}"  type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      
+   <button type="submit" class="btn btn-secondary btn-sm" style="height: 50px;width: 200px;color: coral;" >
+        <span class="bi-plus-square-fill"></span>
+        <span class="bi bi-plus"></span>&nbsp;  submit
+    </button>
+</form>
+{% endblock %}

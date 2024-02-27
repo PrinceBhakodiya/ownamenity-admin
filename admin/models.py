@@ -12,6 +12,71 @@ class adminModel(models.Model):
         db_table = 'admin'
     # def __str__(self): #this is to show the name in the admin panel, you will understand in the next tutorial
     #     return self.name #even if you dont write this function, you will not face any issues
+class empModel(models.Model):
+    emp_id = models.IntegerField(primary_key=True)
+    emp_firstname = models.CharField(max_length=20)
+    emp_lastlame = models.CharField(max_length=20)
+    emp_email = models.CharField(max_length=30)
+    emp_contact = models.IntegerField()
+    password = models.CharField(max_length=20)
+    emp_DOJ = models.DateField()
+    emp_salary = models.IntegerField()
+    emp_address = models.CharField(max_length=100)
+    emp_img = models.CharField(max_length=200)
+    emp_role = models.CharField(max_length=20)
+
+    class Meta:
+       managed=False
+       db_table = 'employee'
+
+class Category(models.Model):
+    cate_id = models.IntegerField(primary_key=True)
+    cate_name = models.CharField(max_length=20)
+
+    class Meta:
+        managed=False
+        db_table = 'category'
+
+class complaintModel(models.Model):
+    c_id = models.AutoField(primary_key=True)
+    c_title = models.CharField(max_length=40)
+    cust_id = models.IntegerField(db_index=True)
+    c_status = models.TextField()
+    c_desc = models.TextField()
+
+    class Meta:
+        managed=False
+        db_table = 'complaint'
+
+class CustMaterial(models.Model):
+    Cate_id = models.IntegerField(db_index=True)
+    material_id = models.AutoField(primary_key=True)
+    material_name = models.CharField(max_length=30)
+
+    class Meta:
+        managed=False
+        db_table = 'cust_martial'
+class MaterialType(models.Model):
+    mate_cat_id = models.AutoField(primary_key=True)
+    material_id = models.IntegerField(db_index=True)
+    mat_price = models.IntegerField()
+    mat_type = models.CharField(max_length=30)
+    mat_img = models.CharField(max_length=200)
+    mat_color = models.CharField(max_length=20)
+
+    class Meta:
+        managed=False
+        db_table = 'mateial_type'
+
+class SelectedMaterial(models.Model):
+    customization_id = models.IntegerField(db_index=True)
+    material_id = models.IntegerField(db_index=True)
+    mate_desc = models.CharField(max_length=50)
+
+    class Meta:
+        managed=False
+        db_table = 'selected_mat'
+
 class productModel(models.Model):
         # id = models.AutoField(primary_key=True)
     P_id = models.IntegerField(primary_key=True,max_length=10)
@@ -42,13 +107,14 @@ class ordersModel(models.Model):
         managed=False
         db_table = 'orders'
 
+
 class UserModel(models.Model):
         # id = models.AutoField(primary_key=True)
     Cust_id = models.IntegerField(max_length=10,primary_key=True)
     First_name = models.CharField(max_length=20, null=False)
     Last_name = models.CharField(max_length=20, null=False)
     Email_id = models.CharField(max_length=30, null=False)
-    Contact_no = models.IntegerField(null=False)
+    Contact_no = models.BigIntegerField(null=False)
     Dob = models.DateField(null=True)
     Password = models.CharField(max_length=10, null=False)
     Address = models.CharField(max_length=100, null=True)
@@ -58,9 +124,29 @@ class UserModel(models.Model):
     class Meta:
         managed=False
         db_table = 'customer'
-from django import forms
 
-class ProductForm(forms.ModelForm):
+class ProductImage(models.Model):
+    p_img_id = models.IntegerField(primary_key=True) 
+    p_img_link = models.CharField(max_length=200)
+    p_id = models.IntegerField(max_length=10) 
+    
     class Meta:
-        model = productModel
-        fields = ['P_name', 'P_desc', 'P_category_id', 'P_curstock', 'P_price', 'P_rating']
+            managed=False
+            db_table = 'product_image' 
+
+class CategoryModel(models.Model):
+    Cate_id = models.IntegerField(primary_key=True)
+    Cate_name = models.CharField(max_length=200)
+
+    class Meta:
+        managed=False
+        db_table= 'category'
+class OrderProduct(models.Model):
+    O_id = models.IntegerField()
+    p_id = models.IntegerField()   
+    p_name = models.IntegerField()   
+    id = models.AutoField(primary_key=True) 
+
+    class Meta:
+        managed=False
+        db_table = 'order_product'

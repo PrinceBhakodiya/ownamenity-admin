@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OwnAmenity</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        .navbar {
+            background-color: #FF7518;
+        }
+        .headbar{
+            position: fixed;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            color: white !important;
+        }
+
+        .sidebar {
+            position: fixed;
+            border: 2px solid #e6e0de;
+            border-radius: 0 20px 20px 0;
+            padding: 20px;
+            height: 100%;
+            margin-top: -24px;
+            width: 400px;
+        }
+
+        .sidebar-sticky {
+            background-color: white;
+            height: 450px;
+        }
+
+        .nav-link {
+            color: #FF7518;
+            font-size: 18px;
+        }
+
+        .nav-link.active {
+            font-weight: bold;
+        }
+        
+        .nav-link:hover {
+            color: black;
+        }
+
+        .custom-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light"class="headbar">
+    <a class="navbar-brand" href="">OwnAmenity</a>
+    
+</nav>
+
+<div class="container-fluid mt-4">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="Employe_Home">
+                                    Dashboard
+                                </a>
+                            </li>
+                            <!-- <li class="nav-item">
+                                <a class="nav-link" href="product">
+                                    Products
+                                </a>
+                            </li>-->
+                            <li class="nav-item"> 
+                                <a class="nav-link" href="order">
+                                    Order
+                                </a>
+                             </li>
+                            <!--<li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    Custumize 
+                                </a>
+                            </li> -->
+                            <!-- <li class="nav-item">
+                                <a class="nav-link" href="category">
+                                    Categoty 
+                                </a>
+                            </li> -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="login">
+                                    Logout 
+                                </a>
+                            </li>
+                            <!-- Add more sidebar items as needed -->
+                   
+                </ul>
+            </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <!-- Your page content goes here -->
+                {% block main %}
+                
+                {% endblock %}
+        </main>
+    </div>
+</div>
+
+</body>
+</html>

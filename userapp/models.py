@@ -62,7 +62,7 @@ class Category(models.Model):
 
 class Orders(models.Model):
         # id = models.AutoField(primary_key=True)
-    o_id = models.AutoField(primary_key=True)
+    O_id = models.TextField(primary_key=True)  # Primary key field
     Cust_id = models.IntegerField(max_length=10,null=False)
     o_date = models.DateField(null=False)
     o_address = models.CharField(max_length=100,null=False)
@@ -79,9 +79,9 @@ class Orders(models.Model):
 
 class OrderProduct(models.Model):
         # id = models.AutoField(primary_key=True)
-    o_p_id = models.AutoField(primary_key=True,db_column='o_p_id')
+    id = models.AutoField(primary_key=True)
 
-    order_id = models.ForeignKey(Orders, related_name='Orders', on_delete=models.CASCADE, db_column='order_id')
+    order_id = models.ForeignKey(Orders, related_name='Orders', on_delete=models.CASCADE, db_column='O_id')
     p_id=models.ForeignKey(Product, related_name='product', on_delete=models.CASCADE, db_column='p_id')
     
     class Meta:
@@ -130,11 +130,22 @@ class Cart(models.Model):
 class CartProduct(models.Model):
     id = models.AutoField(primary_key=True)
     cart_id = models.ForeignKey(Cart, on_delete=models.CASCADE,db_column='cart_id')
-    P_id= models.ForeignKey(Product, on_delete=models.CASCADE,db_column='P_id')
+    P_id= models.ForeignKey(Product, on_delete=models.CASCADE,db_column='p_id')
     p_quantity = models.PositiveIntegerField(default=1,db_column='p_quantity')
     P_add_date = models.DateField(auto_now_add=True, db_column='P_add_date')
 
     class Meta:
         managed = False
         db_table = 'cart_product'
+   
+class OrderStatus(models.Model):
+    o_id = models.TextField(primary_key=True,db_column="o_id")
+    order_no = models.ForeignKey(Cart, on_delete=models.CASCADE,db_column='order_id')
+    order_exp_date= models.DateField(auto_now_add=True, db_column='order_exp_date')
+    delivery_date = models.DateField(auto_now_add=True, db_column='delivery_date')
+    order_status= models.TextField( db_column='order_status')
+
+    class Meta:
+        managed = False
+        db_table = 'order_status'
    

@@ -1,0 +1,29 @@
+{% extends 'temp_emp.html' %}
+
+{% block main %}
+<h2>Edit Status</h2>
+<hr>
+<form method="post" action="" style="text-align: center;">
+    {% csrf_token %} 
+    <!-- {{data.P_id}} -->
+      
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">order id</span>
+        &nbsp; <input name="o_id" value="{{data.o_id}}" readonly type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Status</span>
+        &nbsp;<input name="status" value="{{data.status}}"  type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      
+   <button type="submit" class="btn btn-secondary btn-sm" style="height: 50px;width: 200px;color: coral;" >
+        <span class="bi-plus-square-fill"></span>
+        <span class="bi bi-plus"></span>&nbsp;  submit
+    </button>
+</form>
+{% if alert_message %}
+<script>
+alert("{{ alert_message }}");
+</script>
+{% endif %}{% endblock %}

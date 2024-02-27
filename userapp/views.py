@@ -4,12 +4,15 @@ from django.http import JsonResponse,HttpResponse
 from .models import *
 from django.db import transaction
 from django.views.decorators.csrf import csrf_exempt
+import uuid
 
 @csrf_exempt
 def Customerview(request):
-    if request.method == "GET":    
-        cust = Customer.objects.all()
-        serialized_data = [customer.to_dict() for customer in cust]
+    if request.method == "GET":  
+        emailid = request.GET.get('email_id')  # You might need to use request.POST or request.body based on your fronten
+
+        cust =  Customer.objects.get(email_id=emailid)
+        serialized_data = cust.to_dict()
         return JsonResponse( serialized_data, safe=False)
     
     elif request.method == "POST":
@@ -29,7 +32,6 @@ def Customerview(request):
             email_id=data['email'],
             contact_no=data['contact_no'],
             password=data['password']
-            # Add other fields here
         )
         cart = Cart.objects.create(cust_id=new_customer.cust_id)
 
@@ -260,6 +262,9 @@ def checkout(request):
         # Extract data from the request
         email = request.POST.get('email')
         address = request.POST.get('address')
+        amount = request.POST.get('amount')
+        disc_amount = request.POST.get('discount')
+        payment_mtd=request.POST.get('patyment_mtd')
 
         try:
             # Retrieve the customer's cart
@@ -281,21 +286,21 @@ def checkout(request):
                 Cust_id=customer_cart.cust.cust_id,
                 o_date=datetime.now().date(),
                 o_address=address,
-                o_total_amt=total_amount,
-                o_disc_price=discounted_price,
-                o_payment_mtd="online",
+                o_total_amt=amount,
+                o_disc_price=disc_amount,
+                o_payment_mtd=payment_mtd,
                 o_type="standard",
             )
-            print(order.o_id)
             # Create order products
             for cart_product in cart_products:
                 OrderProduct.objects.create(
                     order_id=order,  # Assign the entire order object
-                    p_id=cart_product.P_id,
+                    p_id=cart_product.P_id, 
                 )
 
             # Empty the cart after checkout
             cart_products.delete()
+            OrderStatus.objects.create(order_no=order.o_id, status="Confirmed")
 
             return JsonResponse({"msg": "Order placed successfully", "order_id": order.o_id}, status=200)
 
@@ -321,7 +326,7 @@ def orders(request):
 
             for order in orders:
                 order_data = {
-                    'order_id': order.o_id,
+                    'order_id': order.O_id,
                     'order_date': order.o_date.strftime('%Y-%m-%d'),
                     'order_address': order.o_address,
                     'total_amount': order.o_total_amt,
@@ -331,19 +336,25 @@ def orders(request):
                     'products': []
                 }
     # Retrieve products associated with the order
-                order_products = OrderProduct.objects.filter(order_id=order.o_id)
+                order_products = OrderProduct.objects.filter(order_id=order.O_id)
                 for order_product in order_products:
-                    product_data = {
-                        'product_id': order_product.p_id.p_id,
+                    product_data = {                        'product_id': order_product.p_id.p_id,
                         'product_name': order_product.p_id.p_name,
                         # 'quantity': order_product.P_quantity,
                         'price_per_unit': order_product.p_id.p_price
                     }
                     order_data['products'].append(product_data)
+                try:
+                    order_status = OrderStatus.objects.get(order_no=order.O_id)
+                    order_data['order_status'] = order_status.order_status
+                    order_data['expected_delivery_date'] = order_status.order_exp_date.strftime('%Y-%m-%d')
+                except OrderStatus.DoesNotExist:
+                    order_data['order_status'] = "Unknown"
+                    order_data['expected_delivery_date'] = "Unknown"
 
                 order_list.append(order_data)
 
-            return JsonResponse({"orders": order_list}, status=200)
+            return JsonResponse( order_list,safe=False,      status=200)
 
         except Cart.DoesNotExist:
             return JsonResponse({"error": "Cart not found"}, status=404)
