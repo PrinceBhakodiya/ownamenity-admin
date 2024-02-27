@@ -17,16 +17,18 @@
                                    
           </tr>
         </thead>
-        <hr>
-        {% for category in category %}
         <tbody >
+
+        <hr>
+        {% for category in categories %}
           <tr>
             <td>{{category.Cate_id}}</td>
             <td>{{category.Cate_name}}</td>
             
           </tr>
-        </tbody>
         {%endfor%}
+      </tbody>
+
       </table>
       <div class="text-center">
       

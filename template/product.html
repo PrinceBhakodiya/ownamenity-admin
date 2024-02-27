@@ -1,8 +1,15 @@
 {% extends 'temp.html' %}
 
+
+view
 {% block main %}    
 <div class="text-center">
-    <h3>{{msg}}</h3>
+  {% if msg %}
+      <script>
+    alert("{{msg}}");
+    </script>
+{% endif %}
+    <center>
   <a  active href="{% url 'add_product' %}" style="text-decoration: none;">
   <button type="button" class="btn btn-secondary btn-sm" style="height: 50px;width: 200px;color: coral;" >
     Add Product
@@ -10,7 +17,7 @@
     <span class="bi bi-plus"></span>&nbsp;  
   </button>
   </a>
-    <table class="table table-dark">
+    <table class="table table-dark" style="border-radius: 20px;">
         <thead style="height: 80px;color: coral;">
           <tr>
             <th scope="col">id</th>
@@ -24,8 +31,10 @@
         </thead>
         <hr>
                
-        {%for product in products%}
         <tbody >
+   
+        {%for product in products%}
+        
           <tr>
             <td>{{product.P_id}}</td>
             <td>{{product.P_name}}</td>
@@ -33,15 +42,21 @@
             <td>{{product.P_curstock}}</td>
             <td>{{product.P_rating}}</td>
             <td>{{product.P_desc}}</td>
+            {%for image in pro_img%}
+            {% if image.p_id == product.P_id  %}
             <td>
-              <img src={{pro_img.P_img_link}} alt="image" width="50" height="50">
+              <img src={{image.p_img_link}} alt={{image.p_img_link}} width="50" height="50">
             </td>
+            {%endif%}
+            {%endfor%}
             <td><a href="edit-product/{{product.P_id}}">Edit</del></a></td>
             <td><a href="delete-product/{{product.P_id}}">Delete</del></a></td>
         </tr>
-        </tbody>
         {%endfor%}
+      </tbody>
+
       </table>
     
     </div>
+  </center>
 {% endblock %}

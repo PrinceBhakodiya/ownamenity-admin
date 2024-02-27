@@ -12,6 +12,23 @@ class adminModel(models.Model):
         db_table = 'admin'
     # def __str__(self): #this is to show the name in the admin panel, you will understand in the next tutorial
     #     return self.name #even if you dont write this function, you will not face any issues
+class empModel(models.Model):
+    emp_id = models.IntegerField(primary_key=True)
+    emp_firstname = models.CharField(max_length=20)
+    emp_lastlame = models.CharField(max_length=20)
+    emp_email = models.CharField(max_length=30)
+    emp_contact = models.IntegerField()
+    password = models.CharField(max_length=20)
+    emp_DOJ = models.DateField()
+    emp_salary = models.IntegerField()
+    emp_address = models.CharField(max_length=100)
+    emp_img = models.CharField(max_length=200)
+    emp_role = models.CharField(max_length=20)
+
+    class Meta:
+       managed=False
+       db_table = 'employee'
+
 class productModel(models.Model):
         # id = models.AutoField(primary_key=True)
     P_id = models.IntegerField(primary_key=True,max_length=10)

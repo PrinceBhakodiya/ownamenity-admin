@@ -1,0 +1,47 @@
+{% extends 'temp.html' %}
+{% block main %}    
+<div class="text-center">
+  {% if msg %}
+  <script>
+alert("{{msg}}");
+</script>
+{% endif %}
+<a  active href="{% url 'add_MateOpt' %}" style="text-decoration: none;">
+  <button type="button" class="btn btn-secondary btn-sm" style="height: 50px;width: 200px;color: coral;" >
+    Add Material options
+    <span class="bi-plus-square-fill"></span>
+    <span class="bi bi-plus"></span>&nbsp;  
+  </button>
+  </a>
+  <table class="table table-dark">
+        <thead style="height: 80px;color: coral;">
+          <tr>
+            <th scope="col">name</th>
+            <th scope="col">price</th>
+            <th scope="col">color</th>                        
+            <th scope="col">photo</th>                      
+          </tr>
+        </thead>
+        <hr>
+               
+        <tbody >
+   
+        {%for Mate in Materials%}
+        {%if matId == Mate.material_id%}
+          <tr>
+            <td>{{Mate.mat_type}}</td>
+            <td>{{Mate.mat_price}}</td>
+            <td>{{Mate.mat_color}}</td>
+            <td>
+            <img src={{Mate.mat_img}} alt={{Mate.mat_img}} width="50" height="50"></td>
+            <td><a href="edit_MateOpt/{{Mate.mate_cat_id}}" style="text-decoration: none;">Edit</del></a></td>
+            <td><a href="delete_MatOpt/{{Mate.mate_cat_id}}/{{matId}}" style="text-decoration: none;">Delete</del></a></td>
+        </tr>
+        {%endif%}
+        {%endfor%}
+      </tbody>
+
+      </table>
+    
+    </div>
+{% endblock %}

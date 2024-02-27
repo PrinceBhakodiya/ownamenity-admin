@@ -1,0 +1,32 @@
+{% extends 'temp.html' %}
+
+{% block main %}    
+    <table class="table table-dark">
+        <thead style="height: 80px;color: coral;">
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Title</th>
+            <th scope="col">customer</th>
+            <th scope="col">status</th>
+            <th scope="col">description</th>
+            </tr>
+        </thead>
+        <hr>
+        <tbody >
+            {% for complaint in comps %}
+          <tr>
+            <td>{{complaint.c_id}}</td>
+            <td>{{complaint.c_title}}</td>
+            <td>{{complaint.cust_id}}</td>
+            <td>{{complaint.c_status}}</td>
+            <td>{{complaint.c_desc}}</td>
+          </tr>
+          {%endfor%}
+
+        </tbody>
+      </table>
+      <div class="text-center">
+      
+      
+    </div>
+{% endblock %}

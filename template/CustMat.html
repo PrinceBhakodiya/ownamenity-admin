@@ -1,0 +1,38 @@
+{% extends 'temp.html' %}
+{% block main %}   
+<div class="text-center">
+  <h3>{{msg}}</h3> 
+  <a  active href="{% url 'add_CustMat' %}" style="text-decoration: none;">
+  <button type="button" class="btn btn-secondary btn-sm" style="height: 50px;width: 200px;color: coral;" >
+    Add Material
+    <span class="bi-plus-square-fill"></span>
+    <span class="bi bi-plus"></span>&nbsp;  
+  </button>
+  </a>
+    <table class="table table-dark">
+        <thead style="height: 80px;color: coral;">
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">name</th>
+            <th scope="col"></th>                                   
+          </tr>
+        </thead>
+        <tbody >
+
+        <hr>
+        {% for Material in Materials %}
+          <tr>
+            <td>{{Material.material_id}}</td>
+            <td>{{Material.material_name}}</td>
+            <td><a href="MatType/{{Material.material_id}}">Options</del></a></td>
+          </tr>
+          {%endfor%}
+      </tbody>
+
+      </table>
+      <div class="text-center">
+      
+      
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'temp.html' %}
+
+{% block main %}
+<h2>edit Material option</h2>
+<hr>
+<form method="post" action="" style="text-align: center;">
+    {% csrf_token %}
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="inputGroup-sizing-default"> Cate_id</span>
+      &nbsp; <select name="material_id" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        {% for material in materials %}
+          <option name="material_id" value="{{ material.material_id}}">{{ material.material_name}}</option>
+        {% endfor %}
+      </select>
+    </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default"> id</span>
+        &nbsp; <input name="type_id" value="{{data.mate_cat_id}}" readonly type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default"> name</span>
+        &nbsp; <input name="name" value="{{data.mat_type}}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default"> price</span>
+        &nbsp; <input name="price" value="{{data.mat_price}}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default"> image</span>
+        &nbsp; <input name="image" value="{{data.mat_img}}"type="file" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default"> color</span>
+        &nbsp; <input name="color" value="{{data.mat_color}}"type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      
+      
+   <button type="submit" id="submit-btn" class="btn btn-secondary btn-sm" style="height: 50px;width: 200px;color: coral;" >
+    <span class="bi-plus-square-fill"></span>
+    <span class="bi bi-plus"></span>&nbsp;  submit  
+    </button>
+</form>
+
+{% endblock %}

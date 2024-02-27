@@ -1,7 +1,14 @@
 {% extends 'temp.html' %}
+    {% block name %}
+       {% if name %}
+       ,{{ name }}
+       {% else %}
+        admin
+       {% endif %}
+    {%  endblock %}
 
-{% block main %}
-    <!-- Your page content goes here -->
+    {% block main %}
+   <!-- Your page content goes here -->
     <h2>Admin Panel</h2>
     <!-- <p>Welcome to the admin panel!</p> -->
     <div class="container-fluid mt-4">
@@ -62,4 +69,4 @@
           </tr>
         </tbody>
       </table> -->
-{% endblock %}
+{%  endblock %}

@@ -1,0 +1,44 @@
+{% extends 'temp.html' %}
+
+{% block main %}    
+<h3>Employees</h3>
+
+    <table class="table table-dark">
+        <thead style="height: 80px;color: coral;">
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">name</th>
+            <th scope="col">email</th>
+            <th scope="col">contact</th>
+            <th scope="col">password</th> 
+            <th scope="col">DOJ</th>
+            <th scope="col">salary</th>                        
+            <th scope="col">address</th>                        
+            <th scope="col">img</th>                        
+            <th scope="col">role</th>                        
+          </tr>
+        </thead>
+        <hr>
+        <tbody >
+        {% for empd in emp %}
+          <tr>
+            <td >{{empd.emp_id}}</td>
+            <td >{{empd.emp_firstname}} {{empd.emp_lastlame}}</td>
+            <!-- <td >{{empd.emp_lastlame}}</td> -->
+            <td >{{empd.emp_email}}</td>
+            <td >{{empd.emp_contact}}</td>
+            <td >{{empd.password}}</td> 
+            <td >{{empd.emp_DOJ}}</td>
+            <td >{{empd.emp_salary}}</td>                        
+            <td >{{empd.emp_address}}</td>                        
+            <td > <img src={{empd.emp_img}} alt="image not open" width="50" height="50"></td>                        
+            <td >{{empd.emp_role}}</td>  
+          </tr>
+        </tbody>
+        {%endfor%}
+      </table>
+      <div class="text-center">
+      
+      
+    </div>
+{% endblock %}
