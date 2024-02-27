@@ -9,6 +9,7 @@ class adminModel(models.Model):
     
     class Meta:
         managed=False
+        app_label = 'ownamenity'
         db_table = 'admin'
     # def __str__(self): #this is to show the name in the admin panel, you will understand in the next tutorial
     #     return self.name #even if you dont write this function, you will not face any issues
@@ -24,6 +25,8 @@ class productModel(models.Model):
     
     class Meta:
         managed=False
+        app_label = 'ownamenity'
+
         db_table = 'product'
 
 class ordersModel(models.Model):
