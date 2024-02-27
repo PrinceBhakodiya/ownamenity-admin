@@ -1,0 +1,61 @@
+{% extends 'temp.html' %}
+
+
+view
+{% block main %}    
+<div class="text-center">
+  {% if msg %}
+      <script>
+    alert("{{msg}}");
+    </script>
+{% endif %}
+    <center>
+  <a  active href="{% url 'offer' %}" style="text-decoration: none;">
+  <button type="button" class="btn btn-secondary btn-sm" style="height: 50px;width: 200px;color: coral;" >
+    Add Product
+    <span class="bi-plus-square-fill"></span>
+    <span class="bi bi-plus"></span>&nbsp;  
+  </button>
+  </a>
+    <table class="table table-dark" style="border-radius: 20px;">
+        <thead style="height: 80px;color: coral;">
+          <tr>
+            <th scope="col">offer_id</th>
+            <th scope="col">offer_name</th>
+            <th scope="col">p_id</th>
+            <th scope="col">offer_type</th>
+            <th scope="col">discount_value</th>
+            <th scope="col">start_date</th>
+            <th scope="col">end_date</th>
+            <th scope="col">isActive</th>                        
+            <th scope="col">description</th>                        
+          </tr>
+        </thead>
+        <hr>
+               
+        <tbody >
+   
+        {%for detail in details%}
+        
+          <tr>
+            <td>{{product.offer_id}}</td>
+            <td>{{product.offer_name}}</td>
+            <td>{{product.p_id}}</td>
+            <td>{{product.offer_type}}</td>
+            <td>{{product.discount_value}}</td>
+            <td>{{product.start_date}}</td>
+            <td>{{product.end_date}}</td>
+            <td>{{product.isActive}}</td>
+            <td>{{product.description}}</td>
+           
+            <td><a href="edit-product/{{product.P_id}}">Edit</del></a></td>
+            <td><a href="delete-product/{{product.P_id}}">Delete</del></a></td>
+        </tr>
+        {%endfor%}
+      </tbody>
+
+      </table>
+    
+    </div>
+  </center>
+{% endblock %}
