@@ -150,6 +150,9 @@ def category(request):
 def custMat(request):
     Materials = CustMaterial.objects.all()
     return HttpResponse(render(request,'CustMat.html',{"Materials":Materials}))
+def offer(request):
+    details = OfferModel.objects.all()
+    return HttpResponse(render(request,'offer.html',{"details":details}))
 def MatType(request,mateid,msg=""):
     Materials = MaterialType.objects.all()
     print(mateid)
