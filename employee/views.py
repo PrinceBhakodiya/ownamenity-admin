@@ -34,3 +34,6 @@ def edit_status(request,order_id):
             print("not updated")
             print(e)
             return redirect(request, 'orders')
+
+
+     

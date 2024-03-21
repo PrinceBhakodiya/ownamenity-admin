@@ -146,6 +146,7 @@ class OrderProduct(models.Model):
     p_id = models.IntegerField()   
     p_name = models.IntegerField()   
     id = models.AutoField(primary_key=True) 
+    P_quantity = models.IntegerField() 
 
     class Meta:
         managed=False

@@ -229,4 +229,7 @@ def delete_MatOpt(request,mate_cat_id,mateid):
         product.delete()
         print("deleted")
         return MatType(request,msg="Option Removed",mateid=mateid)
-   
+def order_products(request,order_id):
+     if request.method == 'GET':
+        data = OrderProduct.objects.all()
+        return render(request,'order_product.html',{"data":data,"id":order_id})
