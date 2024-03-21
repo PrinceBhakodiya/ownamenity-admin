@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-_b21xpu^61tw*yi$=7_#)1f_%t=z-&nkvpd^pyec%8zjzbnyp(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+
+ALLOWED_HOSTS = ['127.0.0.1',"localhost","192.168.43.117","192.168.1.5","192.168.212.175"]
 
 
 # Application definition
@@ -40,8 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'admin',
     'userapp',
-    'employee',
-]
+    'ownamenity'
+,
+'employee']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -85,7 +87,7 @@ WSGI_APPLICATION = 'ownamenity.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ownamenity',
+        'NAME': 'ownamenity_db',
         'USER': 'root',
         'PASSWORD': '',
         'HOST':'localhost',
