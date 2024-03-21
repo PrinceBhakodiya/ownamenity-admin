@@ -52,8 +52,9 @@ def products(request,msg=""):
     return HttpResponse(render(request,'Product.html',{'products':products,'pro_img':Pro_image,"msg":msg}))
 def complaints(request):
     comps = complaintModel.objects.all()
-    print(comps)
-    return HttpResponse(render(request,'complaints.html',{'comps':comps}))
+    name = request.session['email']
+    print(name)
+    return HttpResponse(render(request,'complaints.html',{'comps':comps,'email':name}))
 def Orders(request):
     orders = ordersModel.objects.all()
     products= OrderProduct.objects.all()
@@ -73,8 +74,6 @@ def add_product(request):
         category = CategoryModel.objects.all()
         return render(request,'addProduct.html',{"categories":category})
     if request.method == 'POST':
-        P_id = request.POST['P_id']
-        print(P_id)
         p_image = request.POST['image']
         p_name = request.POST['name']
         P_desc = request.POST['P_desc']
@@ -83,23 +82,21 @@ def add_product(request):
         P_price = request.POST['P_price']
         P_rating = request.POST['P_rating']
         try:
-            product= productModel.objects.create(P_id=P_id
-                                                 ,P_name=p_name
+            product= productModel.objects.create(P_name=p_name
                                                  ,P_desc=P_desc
                                                  ,P_category_id=P_category_id
                                                  ,P_curstock=P_curstock
                                                  ,P_price=P_price
-                                                 ,P_rating=P_rating
+                                                 ,P_rating=P_rating 
                                                )
-            product.save()
-            print("product done")
+            latest_product = productModel.objects.latest('P_id')
+            pid=latest_product.P_id
+            print(pid)
             try:
-                id=P_id
-                pro_image= ProductImage.objects.create(p_id=id
-                                                    ,p_img_id=P_id
+                pro_image= ProductImage.objects.create(p_id=pid
                                                     ,p_img_link=p_image
                                                     )
-                pro_image.save()
+                #pro_image.save()
                 return products(request,msg="product added")
             except Exception as e:
                 print(e)
@@ -109,7 +106,7 @@ def add_product(request):
 def delete_product(request, product_id):
     product = get_object_or_404(productModel, P_id=product_id)
     product.delete()
-    return products(request,msg="product removed") 
+    return redirect('/product')
 
 def edit_product(request,product_id):
      if request.method == 'GET':
@@ -133,7 +130,7 @@ def edit_product(request,product_id):
             product.P_category_id=P_category_id
             product.P_curstock=P_curstock
             product.P_price=P_price
-            product.P_rating=P_rating 
+            product.P_rating=P_rating
            # productI= ProductImage.objects.get(P_id=P_id)
            # productI.p_img_link=p_image
             product.save()
@@ -150,20 +147,18 @@ def category(request):
 def custMat(request):
     Materials = CustMaterial.objects.all()
     return HttpResponse(render(request,'CustMat.html',{"Materials":Materials}))
-def offer(request):
-    details = OfferModel.objects.all()
-    return HttpResponse(render(request,'offer.html',{"details":details}))
+# def offer(request):
+#     details = OfferModel.objects.all()
+#     return HttpResponse(render(request,'offer.html',{"details":details}))
 def MatType(request,mateid,msg=""):
     Materials = MaterialType.objects.all()
     print(mateid)
     return HttpResponse(render(request,'MateType.html',{"Materials":Materials,"matId":mateid,"msg":msg}))
 def add_Category(request):
      if request.method == 'POST':
-        c_id = request.POST['C_id']
         c_name = request.POST['C_name']
         try:
-            categor= CategoryModel.objects.create(Cate_id=c_id,Cate_name=c_name)
-            categor.save()
+            categor= CategoryModel.objects.create(Cate_name=c_name)
             return category(request)
         except Exception as e:
             print(e)
@@ -175,11 +170,9 @@ def add_CustMat(request):
 
      if request.method == 'POST':
         Cate_id = request.POST['Cate_id']
-        material_id = request.POST['material_id']
         material_name = request.POST['material_name']
         try:
-            categor= CustMaterial.objects.create(Cate_id=Cate_id,material_id=material_id,material_name=material_name)
-            categor.save()
+            categor= CustMaterial.objects.create(Cate_id=Cate_id,material_name=material_name)
             return custMat(request)
         except Exception as e:
             print(e)
@@ -190,22 +183,18 @@ def add_MateOpt(request):
         return render(request,'addMateOpt.html',{"materials":materials})
      if request.method == 'POST':
         Cate_id = request.POST['material_id']
-        mate_cat_id = request.POST['type_id']
         mat_price = request.POST['price']
         mat_type=request.POST['name']
         mat_img=request.POST['image']
         mat_color=request.POST['color']
         print(Cate_id)
-        print(mate_cat_id)
         try:
             categor= MaterialType.objects.create(material_id=Cate_id,
-                                                 mate_cat_id=mate_cat_id,
                                                  mat_price=mat_price,
                                                  mat_type=mat_type,
                                                  mat_img=mat_img,
                                                  mat_color=mat_color,
                                                  )
-            categor.save()
             print("adddone")
             return MatType(request,msg="add")
         except Exception as e:

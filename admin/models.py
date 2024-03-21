@@ -151,18 +151,4 @@ class OrderProduct(models.Model):
         managed=False
         db_table = 'order_product'
 
-class OfferModel(models.Model):
-    offer_id = models.AutoField(primary_key=True)
-    offer_name = models.CharField(max_length=20)
-    p_id = models.IntegerField()
-    offer_type = models.CharField(max_length=50)
-    discount_value = models.DecimalField(max_digits=10, decimal_places=2)
-    start_date = models.DateField()
-    end_date = models.DateField()
-    isActive = models.BooleanField(default=True)
-    description = models.CharField(max_length=100)
-
-    class Meta:
-        managed=False
-        db_table = 'offer'
         

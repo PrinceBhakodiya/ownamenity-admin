@@ -17,6 +17,7 @@ urlpatterns = [
     path('order', order, name="order"),
     path('User_List', User_List, name="user"),
     path('emp', emp, name="emp"),
+    #path('offer', offer, name="offer"),
     path('/addProduct', add_product, name='add_product'),
     path('/addCategory',add_Category,name='add_Category'),
     path('category',category,name='category'),
