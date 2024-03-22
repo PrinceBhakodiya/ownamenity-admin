@@ -1,4 +1,4 @@
-{% extends 'temp.html' %}
+{% extends 'temp_emp.html' %}
 view
 {% block main %}  
 <table class="table table-dark">
@@ -9,7 +9,6 @@ view
         <th scope="col">return_status</th>
         <th scope="col">return_price</th>
         <th scope="col">return_tran_id</th>
-                               
       </tr>
     </thead>
     <tbody>
@@ -21,11 +20,7 @@ view
         <td>{{refund.return_status}}</td>
         <td>{{refund.return_price}}</td>
         <td>{{refund.return_tran_id}}</td>
-        {% if refund.return_status == "complated" %}
-        <td><a href="https://dashboard.razorpay.com/app/payments">Refund</del></a></td>
-        {% if refund.return_status == "return" %}
-        <td><a href="refund-pay/{{refund.id}}">Refund</del></a></td>
-        {% endif %}
+        <td><a href="return_change/{{refund.return_id}}">edit</del></a></td>
       </tr>
     {%endfor%}
   </tbody>

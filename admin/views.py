@@ -70,19 +70,26 @@ def my_view(request):
 def add_product(request):
     if request.method == 'GET':
         category = CategoryModel.objects.all()
-        return render(request,'addProduct.html',{"categories":category})
+        sub_cat = subCatModel.objects.all()
+        return render(request,'addProduct.html',{"categories":category,"sub_cat":sub_cat})
     if request.method == 'POST':
+        print("command :  it inside")
         p_image = request.POST['image']
         p_name = request.POST['name']
         P_desc = request.POST['P_desc']
         P_category_id = request.POST['P_category_id']
+        sub_cat_id = request.POST['sub_cat_id']
         P_curstock = request.POST['P_curstock']
         P_price = request.POST['P_price']
         P_rating = request.POST['P_rating']
+        print("command :  it got post data")
+        print(p_image,p_name,P_desc,P_category_id,sub_cat_id,P_curstock,P_price,P_rating)
         try:
-            product= productModel.objects.create(P_name=p_name
+            product= productModel.objects.create(
+                                                  P_name=p_name
                                                  ,P_desc=P_desc
                                                  ,P_category_id=P_category_id
+                                                 ,P_subcat_id=sub_cat_id
                                                  ,P_curstock=P_curstock
                                                  ,P_price=P_price
                                                  ,P_rating=P_rating 
@@ -94,7 +101,6 @@ def add_product(request):
                 pro_image= ProductImage.objects.create(p_id=pid
                                                     ,p_img_link=p_image
                                                     )
-                #pro_image.save()
                 return products(request,msg="product added")
             except Exception as e:
                 print(e)
@@ -109,13 +115,16 @@ def delete_product(request, product_id):
 def edit_product(request,product_id):
      if request.method == 'GET':
         data= productModel.objects.get(P_id=product_id)
+        dataimage= ProductImage.objects.get(p_id=product_id)
         category = CategoryModel.objects.all()
-        return render(request,'editProduct.html',{"data":data,"categories":category})
+        return render(request,'editProduct.html',{"data":data,"categories":category,"dataimage":dataimage})
 
      if request.method == 'POST':
         P_id = request.POST['P_id']
         p_name = request.POST['name']
         p_image = request.POST['P_image']
+        print("image name")
+        print(p_image)
         P_desc = request.POST['P_desc']
         P_category_id = request.POST['P_category_id']
         P_curstock = request.POST['P_curstock']
@@ -132,6 +141,10 @@ def edit_product(request,product_id):
            # productI= ProductImage.objects.get(P_id=P_id)
            # productI.p_img_link=p_image
             product.save()
+            if(p_image != ""):
+             productImg= ProductImage.objects.get(p_id=P_id)
+             productImg.p_img_link=p_image
+             productImg.save()
             #productI.save()
             return HttpResponse(render(request,'editProduct.html',{"msg":"Product Updated Successfully"}))
         except Exception as e:
@@ -214,7 +227,8 @@ def edit_MateOpt(request,mate_cat_id):
             mate= MaterialType.objects.get(mate_cat_id=mate_cat_id)
             mate.mat_price=mat_price
             mate.mat_type=mat_type
-            mate.mat_img=mat_img
+            if(mat_img != ""):
+             mate.mat_img=mat_img
             mate.mat_color=mat_color
             mate.save()
             return HttpResponse(render(request,'editMateOpt.html',{"msg":"Product Updated Successfully"}))
@@ -227,13 +241,14 @@ def delete_MatOpt(request,mate_cat_id,mateid):
         product.delete()
         print("deleted")
         return MatType(request,msg="Option Removed",mateid=mateid)
-def refund(request):
+def refunds(request):
     refund = refundModel.objects.all()
     return HttpResponse(render(request,'refund.html',{"refunds":refund}))
 def order_products(request,order_id):
      if request.method == 'GET':
         data = OrderProduct.objects.all()
         return render(request,'order_product.html',{"data":data,"id":order_id})
+
      
 def subcat(request,Cate_id):
     if request.method == 'GET':
