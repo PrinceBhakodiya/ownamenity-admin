@@ -35,17 +35,11 @@ urlpatterns = [
     path('admin',include('admin.urls')),
     path('employee/',include('employee.urls')),
     path('user/',include('userapp.urls')),
-<<<<<<< HEAD
     # path('offer', offer, name="offer"),
-]
-=======
+
     path('refund',refund,name="refund"),
-<<<<<<< HEAD
-]
->>>>>>> 84b03f15ab19cd171671b6dff19f1398fa797b52
-=======
+
     path('sub-cat',subcat,name="subcategory"),
     path('sub-cat/<int:Cate_id>',subcat,name="subcategory"),
 
 ]
->>>>>>> d83a4f948f4421d10b9ac8af99b6bc68dea626fb

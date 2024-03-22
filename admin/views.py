@@ -70,29 +70,30 @@ def my_view(request):
 def add_product(request):
     if request.method == 'GET':
         category = CategoryModel.objects.all()
-        sub_cat = 
-        return render(request,'addProduct.html',{"categories":category})
+        sub_cat = subCatModel.objects.all()
+        return render(request,'addProduct.html',{"categories":category,"sub_cat":sub_cat})
     if request.method == 'POST':
         print("command :  it inside")
         p_image = request.POST['image']
         p_name = request.POST['name']
         P_desc = request.POST['P_desc']
         P_category_id = request.POST['P_category_id']
+        sub_cat_id = request.POST['sub_cat_id']
         P_curstock = request.POST['P_curstock']
         P_price = request.POST['P_price']
         P_rating = request.POST['P_rating']
         print("command :  it got post data")
-        print(p_name)
+        print(p_image,p_name,P_desc,P_category_id,sub_cat_id,P_curstock,P_price,P_rating)
         try:
             product= productModel.objects.create(
                                                   P_name=p_name
                                                  ,P_desc=P_desc
                                                  ,P_category_id=P_category_id
+                                                 ,P_subcat_id=sub_cat_id
                                                  ,P_curstock=P_curstock
                                                  ,P_price=P_price
                                                  ,P_rating=P_rating 
                                                )
-            product.save()
             latest_product = productModel.objects.latest('P_id')
             pid=latest_product.P_id
             print(pid)
@@ -100,7 +101,6 @@ def add_product(request):
                 pro_image= ProductImage.objects.create(p_id=pid
                                                     ,p_img_link=p_image
                                                     )
-                pro_image.save()
                 return products(request,msg="product added")
             except Exception as e:
                 print(e)
@@ -248,9 +248,7 @@ def order_products(request,order_id):
      if request.method == 'GET':
         data = OrderProduct.objects.all()
         return render(request,'order_product.html',{"data":data,"id":order_id})
-<<<<<<< HEAD
 
-=======
      
 def subcat(request,Cate_id):
     if request.method == 'GET':
@@ -258,4 +256,3 @@ def subcat(request,Cate_id):
         print(Cate_id)
         categorys=Category.objects.get(cate_id=Cate_id)
         return HttpResponse(render(request,'subCategory.html',{"subcats":subcat,"cat_id":Cate_id}))     
->>>>>>> d83a4f948f4421d10b9ac8af99b6bc68dea626fb

@@ -77,13 +77,13 @@ class SelectedMaterial(models.Model):
         managed=False
         db_table = 'selected_mat'
 
-class productModel(models.Model):
+class  productModel(models.Model):
         # id = models.AutoField(primary_key=True)
     P_id = models.IntegerField(primary_key=True,max_length=10)
     P_name = models.CharField(max_length=30, null=False)
     P_desc = models.CharField(max_length=100, null=False)
     P_category_id = models.IntegerField(max_length=5,null=False)
-    p_subcat_id=models.IntegerField(max_length=10,null=False)
+    P_subcat_id = models.IntegerField(max_length=10,null=False)
     P_curstock = models.IntegerField(max_length=10,null=False)
     P_price = models.IntegerField(max_length=10,null=False)
     P_rating = models.FloatField(null=False)
