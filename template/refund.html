@@ -22,7 +22,7 @@ view
         <td>{{refund.return_status}}</td>
         <td>{{refund.return_price}}</td>
         <td>{{refund.return_tran_id}}</td>
-        {% if refund.return_status == "panding" %}
+        {% if refund.return_status == "return" %}
         <td><a href="refund-pay/{{refund.id}}">Refund</del></a></td>
         {% endif %}
         

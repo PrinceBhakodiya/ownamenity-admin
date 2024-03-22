@@ -52,9 +52,7 @@ def products(request,msg=""):
     return HttpResponse(render(request,'Product.html',{'products':products,'pro_img':Pro_image,"msg":msg}))
 def complaints(request):
     comps = complaintModel.objects.all()
-    name = request.session['email']
-    print(name)
-    return HttpResponse(render(request,'complaints.html',{'comps':comps,'email':name}))
+    return HttpResponse(render(request,'complaints.html',{'comps':comps}))
 def Orders(request):
     orders = ordersModel.objects.all()
     products= OrderProduct.objects.all()
@@ -229,13 +227,10 @@ def delete_MatOpt(request,mate_cat_id,mateid):
         product.delete()
         print("deleted")
         return MatType(request,msg="Option Removed",mateid=mateid)
-<<<<<<< HEAD
 def refund(request):
     refund = refundModel.objects.all()
     return HttpResponse(render(request,'refund.html',{"refunds":refund}))
-=======
 def order_products(request,order_id):
      if request.method == 'GET':
         data = OrderProduct.objects.all()
         return render(request,'order_product.html',{"data":data,"id":order_id})
->>>>>>> cc5d31083c23364bf49da2b34d3e9eeabe8817dd
