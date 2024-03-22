@@ -1,8 +1,7 @@
 {% extends 'temp.html' %}
-
-
 view
-{% block main %}    
+{% block main %}  
+{% load static %}  
 <div class="text-center">
   {% if msg %}
       <script>
@@ -17,7 +16,7 @@ view
     <span class="bi bi-plus"></span>&nbsp;  
   </button>
   </a>
-    <table class="table table-dark" style="border-radius: 20px;">
+    <table class="table table-dark" >
         <thead style="height: 80px;color: coral;">
           <tr>
             <th scope="col">id</th>
@@ -34,7 +33,6 @@ view
         <tbody >
    
         {%for product in products%}
-        
           <tr>
             <td>{{product.P_id}}</td>
             <td>{{product.P_name}}</td>
@@ -45,7 +43,7 @@ view
             {%for image in pro_img%}
             {% if image.p_id == product.P_id  %}
             <td>
-              <img src={{image.p_img_link}} alt={{image.p_img_link}} width="50" height="50">
+              <img src="{% static image.p_img_link %}" alt="{{image.p_img_link}}" width="50" height="50">
             </td>
             {%endif%}
             {%endfor%}

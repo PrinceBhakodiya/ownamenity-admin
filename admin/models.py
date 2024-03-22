@@ -146,11 +146,13 @@ class OrderProduct(models.Model):
     p_id = models.IntegerField()   
     p_name = models.IntegerField()   
     id = models.AutoField(primary_key=True) 
+    P_quantity = models.IntegerField() 
 
     class Meta:
         managed=False
         db_table = 'order_product'
 
+<<<<<<< HEAD
 class OfferModel(models.Model):
     offer_id = models.AutoField(primary_key=True)
     offer_name = models.CharField(max_length=20)
@@ -176,3 +178,6 @@ class refundModel(models.Model):
     class Meta:
         managed=False
         db_table='order_refund_return'
+=======
+        
+>>>>>>> cc5d31083c23364bf49da2b34d3e9eeabe8817dd
