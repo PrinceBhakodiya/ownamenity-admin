@@ -34,4 +34,7 @@ urlpatterns = [
     path('employee/',include('employee.urls')),
     path('user/',include('userapp.urls')),
     path('refund',refund,name="refund"),
+    path('sub-cat',subcat,name="subcategory"),
+    path('sub-cat/<int:Cate_id>',subcat,name="subcategory"),
+
 ]

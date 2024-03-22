@@ -42,6 +42,7 @@ view
             <td>{{product.P_desc}}</td>
             {%for image in pro_img%}
             {% if image.p_id == product.P_id  %}
+
             <td>
               <img src="{% static image.p_img_link %}" alt="{{image.p_img_link}}" width="50" height="50">
             </td>

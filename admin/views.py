@@ -234,3 +234,10 @@ def order_products(request,order_id):
      if request.method == 'GET':
         data = OrderProduct.objects.all()
         return render(request,'order_product.html',{"data":data,"id":order_id})
+     
+def subcat(request,Cate_id):
+    if request.method == 'GET':
+        subcat = subCatModel.objects.all()
+        print(Cate_id)
+        categorys=Category.objects.get(cate_id=Cate_id)
+        return HttpResponse(render(request,'subCategory.html',{"subcats":subcat,"cat_id":Cate_id}))     

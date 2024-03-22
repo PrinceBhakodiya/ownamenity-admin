@@ -83,9 +83,11 @@ class productModel(models.Model):
     P_name = models.CharField(max_length=30, null=False)
     P_desc = models.CharField(max_length=100, null=False)
     P_category_id = models.IntegerField(max_length=5,null=False)
+    p_subcat_id=models.IntegerField(max_length=10,null=False)
     P_curstock = models.IntegerField(max_length=10,null=False)
     P_price = models.IntegerField(max_length=10,null=False)
     P_rating = models.FloatField(null=False)
+    
     
     class Meta:
         managed=False
@@ -178,3 +180,14 @@ class refundModel(models.Model):
         managed=False
         db_table='order_refund_return'
 
+class subCatModel(models.Model):
+    sub_cat_id=models.IntegerField(primary_key=True)
+    size=models.CharField(max_length=20)
+    color=models.CharField(max_length=20)
+    material_type=models.CharField(max_length=20)
+    product_type=models.CharField(max_length=20)
+    Cate_id=models.IntegerField()
+
+    class Meta:
+        managed=False
+        db_table='sub_category'

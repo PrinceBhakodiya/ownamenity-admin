@@ -19,6 +19,8 @@ urlpatterns = [
     path('/edit-product/<int:product_id>', edit_product, name='edit_product'),
     path('/delete-product/<int:product_id>', delete_product, name='delete_product'),
     path('/refund',refund,name="refund"),
+    path('/sub-cat/<int:Cate_id>',subcat,name="subcategory"),
+    
     # path('refund-pay/<int:refund>',)
   
     # path('login', login),
