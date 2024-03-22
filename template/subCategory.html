@@ -1,6 +1,7 @@
 {% extends 'temp.html' %}
 view
-{% block main %}  
+{% block main %} 
+
 <h3>Sub Category</h3>
 <table class="table table-dark">
     <thead style="height: 80px;color: coral;">
@@ -25,6 +26,7 @@ view
         <td>{{subcat.material_type}}</td>
         <td>{{subcat.product_type}}</td>
         <td>{{subcat.Cate_id}}</td>  
+        <td><a href="delete_subcate/{{subcat.sub_cat_id}}/{{cat_id}}">Delet</a></td>
       </tr> 
       {%endif%}
     {%endfor%}

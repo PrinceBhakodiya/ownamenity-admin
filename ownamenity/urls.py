@@ -36,5 +36,5 @@ urlpatterns = [
     path('refund',refund,name="refund"),
     path('sub-cat',subcat,name="subcategory"),
     path('sub-cat/<int:Cate_id>',subcat,name="subcategory"),
-
+    path('sub-cat/delete_subcate/<int:sub_cat_id>/<int:Cate_id>', delete_subcate, name='delete_subcat'),
 ]

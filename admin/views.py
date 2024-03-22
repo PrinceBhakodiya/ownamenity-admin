@@ -241,3 +241,8 @@ def subcat(request,Cate_id):
         print(Cate_id)
         categorys=Category.objects.get(cate_id=Cate_id)
         return HttpResponse(render(request,'subCategory.html',{"subcats":subcat,"cat_id":Cate_id}))     
+def delete_subcate(request, sub_cat_id, Cate_id):
+    data = get_object_or_404(subCatModel, sub_cat_id=sub_cat_id)
+    data.delete()
+    print("deleted")
+    return subcat(request, msg="category remove", Cate_id=Cate_id)
