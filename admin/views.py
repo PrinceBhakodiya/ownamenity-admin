@@ -240,4 +240,6 @@ def delete_MatOpt(request,mate_cat_id,mateid):
         product.delete()
         print("deleted")
         return MatType(request,msg="Option Removed",mateid=mateid)
-   
+def refund(request):
+    refund = refundModel.objects.all()
+    return HttpResponse(render(request,'refund.html',{"refunds":refund}))

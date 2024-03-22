@@ -142,7 +142,7 @@ class CategoryModel(models.Model):
         managed=False
         db_table= 'category'
 class OrderProduct(models.Model):
-    O_id = models.IntegerField()
+    O_id = models.IntegerField(max_length=10)
     p_id = models.IntegerField()   
     p_name = models.IntegerField()   
     id = models.AutoField(primary_key=True) 
@@ -165,4 +165,14 @@ class OfferModel(models.Model):
     class Meta:
         managed=False
         db_table = 'offer'
+
+class refundModel(models.Model):
+    return_id= models.IntegerField(primary_key=True)
+    O_id=models.IntegerField(max_length=10)
+    return_status=models.CharField(max_length=100)
+    return_price=models.IntegerField()
+    return_tran_id=models.CharField(max_length=20)
         
+    class Meta:
+        managed=False
+        db_table='order_refund_return'

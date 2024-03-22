@@ -41,9 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'admin',
     'userapp',
-    'ownamenity'
-,
-'employee']
+    'ownamenity',
+    'employee']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -87,7 +86,7 @@ WSGI_APPLICATION = 'ownamenity.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ownamenity_db',
+        'NAME': 'ownamenity',
         'USER': 'root',
         'PASSWORD': '',
         'HOST':'localhost',
