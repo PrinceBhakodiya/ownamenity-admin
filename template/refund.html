@@ -1,0 +1,34 @@
+{% extends 'temp.html' %}
+view
+{% block main %}  
+<table class="table table-dark">
+    <thead style="height: 80px;color: coral;">
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">order_id</th>
+        <th scope="col"> return_status</th>
+        <th scope="col">return_price</th>
+        <th scope="col">return_tran_id</th>
+                               
+      </tr>
+    </thead>
+    <tbody >
+
+    <hr>
+    {% for refund in refunds %}
+      <tr>
+        <td>{{refund.return_id}}</td>
+        <td>{{refund.O_id}}</td>
+        <td>{{refund.return_status}}</td>
+        <td>{{refund.return_price}}</td>
+        <td>{{refund.return_tran_id}}</td>
+        {% if refund.return_status == "panding" %}
+        <td><a href="refund-pay/{{refund.id}}">Refund</del></a></td>
+        {% endif %}
+        
+      </tr>
+    {%endfor%}
+  </tbody>
+
+  </table>
+{% endblock %}

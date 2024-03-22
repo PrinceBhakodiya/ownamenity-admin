@@ -142,7 +142,7 @@ class CategoryModel(models.Model):
         managed=False
         db_table= 'category'
 class OrderProduct(models.Model):
-    O_id = models.IntegerField()
+    O_id = models.IntegerField(max_length=10)
     p_id = models.IntegerField()   
     p_name = models.IntegerField()   
     id = models.AutoField(primary_key=True) 
@@ -152,4 +152,32 @@ class OrderProduct(models.Model):
         managed=False
         db_table = 'order_product'
 
+<<<<<<< HEAD
+class OfferModel(models.Model):
+    offer_id = models.AutoField(primary_key=True)
+    offer_name = models.CharField(max_length=20)
+    p_id = models.IntegerField()
+    offer_type = models.CharField(max_length=50)
+    discount_value = models.DecimalField(max_digits=10, decimal_places=2)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    isActive = models.BooleanField(default=True)
+    description = models.CharField(max_length=100)
+
+    class Meta:
+        managed=False
+        db_table = 'offer'
+
+class refundModel(models.Model):
+    return_id= models.IntegerField(primary_key=True)
+    O_id=models.IntegerField(max_length=10)
+    return_status=models.CharField(max_length=100)
+    return_price=models.IntegerField()
+    return_tran_id=models.CharField(max_length=20)
         
+    class Meta:
+        managed=False
+        db_table='order_refund_return'
+=======
+        
+>>>>>>> cc5d31083c23364bf49da2b34d3e9eeabe8817dd
