@@ -152,7 +152,6 @@ class OrderProduct(models.Model):
         managed=False
         db_table = 'order_product'
 
-<<<<<<< HEAD
 class OfferModel(models.Model):
     offer_id = models.AutoField(primary_key=True)
     offer_name = models.CharField(max_length=20)
@@ -170,7 +169,7 @@ class OfferModel(models.Model):
 
 class refundModel(models.Model):
     return_id= models.IntegerField(primary_key=True)
-    O_id=models.IntegerField(max_length=10)
+    order_id=models.IntegerField(max_length=10)
     return_status=models.CharField(max_length=100)
     return_price=models.IntegerField()
     return_tran_id=models.CharField(max_length=20)
@@ -178,6 +177,4 @@ class refundModel(models.Model):
     class Meta:
         managed=False
         db_table='order_refund_return'
-=======
-        
->>>>>>> cc5d31083c23364bf49da2b34d3e9eeabe8817dd
+
