@@ -1,14 +1,14 @@
 {% extends 'temp.html' %}
 {% block main %}  
     
-    
+    <strong>
     {% for pro in data %}
     {% if pro.O_id == id %}
-    {{pro.p_name}}<br> 
-    	
-    quantity:{{pro.P_quantity}}<br>
-        Id:{{pro.p_id}}<hr>
+   <h3> {{pro.p_name}}<br> </h3>
+   <h4>Id: {{pro.p_id}}</h4>
+<h5> quantity:{{pro.P_quantity}}<br></h5>
+      <hr>
     {% endif %}
     {% endfor %}
-    
+</strong>
     {% endblock %}
