@@ -22,7 +22,9 @@ view
         <td>{{refund.return_price}}</td>
         <td>{{refund.return_tran_id}}</td>
         {% if refund.return_status == "complated" %}
-        <td><a href="https://dashboard.razorpay.com/app/payments">Refu  nd</del></a></td>
+        <td><a href="https://dashboard.razorpay.com/app/payments">Refund</del></a></td>
+        {% if refund.return_status == "return" %}
+        <td><a href="refund-pay/{{refund.id}}">Refund</del></a></td>
         {% endif %}
       </tr>
     {%endfor%}

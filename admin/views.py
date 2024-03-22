@@ -52,9 +52,7 @@ def products(request,msg=""):
     return HttpResponse(render(request,'Product.html',{'products':products,'pro_img':Pro_image,"msg":msg}))
 def complaints(request):
     comps = complaintModel.objects.all()
-    name = request.session['email']
-    print(name)
-    return HttpResponse(render(request,'complaints.html',{'comps':comps,'email':name}))
+    return HttpResponse(render(request,'complaints.html',{'comps':comps}))
 def Orders(request):
     orders = ordersModel.objects.all()
     products= OrderProduct.objects.all()
@@ -72,8 +70,10 @@ def my_view(request):
 def add_product(request):
     if request.method == 'GET':
         category = CategoryModel.objects.all()
+        sub_cat = 
         return render(request,'addProduct.html',{"categories":category})
     if request.method == 'POST':
+        print("command :  it inside")
         p_image = request.POST['image']
         p_name = request.POST['name']
         P_desc = request.POST['P_desc']
@@ -81,14 +81,18 @@ def add_product(request):
         P_curstock = request.POST['P_curstock']
         P_price = request.POST['P_price']
         P_rating = request.POST['P_rating']
+        print("command :  it got post data")
+        print(p_name)
         try:
-            product= productModel.objects.create(P_name=p_name
+            product= productModel.objects.create(
+                                                  P_name=p_name
                                                  ,P_desc=P_desc
                                                  ,P_category_id=P_category_id
                                                  ,P_curstock=P_curstock
                                                  ,P_price=P_price
                                                  ,P_rating=P_rating 
                                                )
+            product.save()
             latest_product = productModel.objects.latest('P_id')
             pid=latest_product.P_id
             print(pid)
@@ -96,7 +100,7 @@ def add_product(request):
                 pro_image= ProductImage.objects.create(p_id=pid
                                                     ,p_img_link=p_image
                                                     )
-                #pro_image.save()
+                pro_image.save()
                 return products(request,msg="product added")
             except Exception as e:
                 print(e)
@@ -111,13 +115,16 @@ def delete_product(request, product_id):
 def edit_product(request,product_id):
      if request.method == 'GET':
         data= productModel.objects.get(P_id=product_id)
+        dataimage= ProductImage.objects.get(p_id=product_id)
         category = CategoryModel.objects.all()
-        return render(request,'editProduct.html',{"data":data,"categories":category})
+        return render(request,'editProduct.html',{"data":data,"categories":category,"dataimage":dataimage})
 
      if request.method == 'POST':
         P_id = request.POST['P_id']
         p_name = request.POST['name']
         p_image = request.POST['P_image']
+        print("image name")
+        print(p_image)
         P_desc = request.POST['P_desc']
         P_category_id = request.POST['P_category_id']
         P_curstock = request.POST['P_curstock']
@@ -134,6 +141,10 @@ def edit_product(request,product_id):
            # productI= ProductImage.objects.get(P_id=P_id)
            # productI.p_img_link=p_image
             product.save()
+            if(p_image != ""):
+             productImg= ProductImage.objects.get(p_id=P_id)
+             productImg.p_img_link=p_image
+             productImg.save()
             #productI.save()
             return HttpResponse(render(request,'editProduct.html',{"msg":"Product Updated Successfully"}))
         except Exception as e:
@@ -216,7 +227,8 @@ def edit_MateOpt(request,mate_cat_id):
             mate= MaterialType.objects.get(mate_cat_id=mate_cat_id)
             mate.mat_price=mat_price
             mate.mat_type=mat_type
-            mate.mat_img=mat_img
+            if(mat_img != ""):
+             mate.mat_img=mat_img
             mate.mat_color=mat_color
             mate.save()
             return HttpResponse(render(request,'editMateOpt.html',{"msg":"Product Updated Successfully"}))

@@ -35,5 +35,10 @@ urlpatterns = [
     path('admin',include('admin.urls')),
     path('employee/',include('employee.urls')),
     path('user/',include('userapp.urls')),
+<<<<<<< HEAD
     # path('offer', offer, name="offer"),
 ]
+=======
+    path('refund',refund,name="refund"),
+]
+>>>>>>> 84b03f15ab19cd171671b6dff19f1398fa797b52
