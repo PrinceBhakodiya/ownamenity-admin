@@ -1,61 +1,77 @@
 {% extends 'temp.html' %}
 view
-{% block main %}  
-{% load static %}  
+{% block main %}
+{% load static %}
 <div class="text-center">
   {% if msg %}
-      <script>
+  <script>
     alert("{{msg}}");
-    </script>
-{% endif %}
-    <center>
-  <a  active href="{% url 'add_product' %}" style="text-decoration: none;">
-  <button type="button" class="btn btn-secondary btn-sm" style="height: 50px;width: 200px;color: coral;" >
-    Add Product
-    <span class="bi-plus-square-fill"></span>
-    <span class="bi bi-plus"></span>&nbsp;  
-  </button>
-  </a>
-    <table class="table table-dark" >
-        <thead style="height: 80px;color: coral;">
-          <tr>
-            <th scope="col">id</th>
-            <th scope="col">name</th>
-            <th scopeff="col">price</th>
-            <th scope="col">currunt stock</th>
-            <th scope="col">rating</th>
-            <th scope="col">description</th>                        
-            <th scope="col">photo</th>                        
-          </tr>
-        </thead>
-        <hr>
-               
-        <tbody >
-   
-        {%for product in products%}
-          <tr>
-            <td>{{product.P_id}}</td>
-            <td>{{product.P_name}}</td>
-            <td>{{product.P_price}}</td>
-            <td>{{product.P_curstock}}</td>
-            <td>{{product.P_rating}}</td>
-            <td>{{product.P_desc}}</td>
-            {%for image in pro_img%}
-            {% if image.p_id == product.P_id  %}
+  </script>
+  {% endif %}
+  <center>
+    <a active href="{% url 'add_product' %}" style="text-decoration: none;">
+      <button type="button" class="btn btn-secondary btn-sm" style="height: 50px;width: 200px;color: coral;">
+        Add Product
+        <span class="bi-plus-square-fill"></span>
+        <span class="bi bi-plus"></span>&nbsp;
+      </button>
+    </a>
+    <table class="table table-dark">
+      <thead style="height: 80px;color: coral;">
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">name</th>
+          <th scopeff="col">price</th>
+          <th scope="col">currunt stock</th>
+          <th scope="col">rating</th>
+          <th scope="col">description</th>
+          <th scope="col">photo</th> 
+          <th scope="col">size</th>
+          <th scope="col">color</th>
+          <th scope="col">material_type</th>
+          <th scope="col">project_type</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <hr>
 
-            <td>
-              <img src="{% static image.p_img_link %}" alt="{{image.p_img_link}}" width="50" height="50">
-            </td>
-            {%endif%}
-            {%endfor%}
-            <td><a href="edit-product/{{product.P_id}}">Edit</del></a></td>
-            <td><a href="delete-product/{{product.P_id}}">Delete</del></a></td>
+      <tbody>
+
+        {%for product in products%}
+        <tr>
+          <td>{{product.P_id}}</td>
+          <td>{{product.P_name}}</td>
+          <td>{{product.P_price}}</td>
+          <td>{{product.P_curstock}}</td>
+          <td>{{product.P_rating}}</td>
+          <td>{{product.P_desc}}</td>
+
+          {%for image in pro_img%}
+          {% if image.p_id == product.P_id %}
+          <td>
+            <img src="{% static image.p_img_link %}" alt="{{image.p_img_link}}" width="50" height="50">
+          </td>
+          {%endif%}
+          {%endfor%}
+          
+          {% for subcat in subcats %}
+          {%if subcat.sub_cat_id == product.P_subcat_id %}
+          <td>{{ subcat.size }}</td>
+          <td>{{ subcat.color }}</td>
+          <td>{{ subcat.material_type }}</td>
+          <td>{{ subcat.product_type }}</td>
+          {% endif %}
+          {% endfor %}
+
+          <td><a href="edit-product/{{product.P_id}}">Edit</del></a></td>
+          <td><a href="delete-product/{{product.P_id}}">Delete</del></a></td>
         </tr>
         {%endfor%}
       </tbody>
 
-      </table>
-    
-    </div>
-  </center>
+    </table>
+
+</div>
+</center>
 {% endblock %}
