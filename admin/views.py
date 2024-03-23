@@ -81,7 +81,6 @@ def add_product(request):
         sub_cat_id = request.POST['sub_cat_id']
         P_curstock = request.POST['P_curstock']
         P_price = request.POST['P_price']
-        P_rating = request.POST['P_rating']
         print("command :  it got post data")
         print(p_image,p_name,P_desc,P_category_id,sub_cat_id,P_curstock,P_price,P_rating)
         try:
@@ -92,7 +91,7 @@ def add_product(request):
                                                  ,P_subcat_id=sub_cat_id
                                                  ,P_curstock=P_curstock
                                                  ,P_price=P_price
-                                                 ,P_rating=P_rating 
+                                                 ,P_rating=1 
                                                )
             latest_product = productModel.objects.latest('P_id')
             pid=latest_product.P_id
@@ -107,6 +106,25 @@ def add_product(request):
                 return render(request, 'addProduct.html')
         except:
             return render(request, 'addProduct.html')
+def add_subCategory(request):
+    if request.method == 'GET':
+        category = CategoryModel.objects.all()
+        return render(request,'add_subCate.html',{"categories":category})
+    if request.method == 'POST':
+        print("command :  it inside")
+        Cate_id = request.POST['Cate_id']
+        product_type = request.POST['product_type']
+        material_type = request.POST['material_type']
+        color = request.POST['color']
+        size = request.POST['size']
+        print("command :  it got post data")
+        product= subCatModel.objects.create(      Cate_id=Cate_id
+                                                 ,product_type=product_type
+                                                 ,material_type=material_type
+                                                 ,color=color
+                                                 ,size=size
+                                               )
+        return render(request, 'add_subCate.html')
 def delete_product(request, product_id):
     product = get_object_or_404(productModel, P_id=product_id)
     product.delete()

@@ -36,10 +36,9 @@ urlpatterns = [
     path('employee/',include('employee.urls')),
     path('user/',include('userapp.urls')),
     # path('offer', offer, name="offer"),
-
     path('refund',refund,name="refund"),
-
     path('sub-cat',subcat,name="subcategory"),
+    path('add_subCategory',add_subCategory,name="add_subCategory"),
     path('sub-cat/<int:Cate_id>',subcat,name="subcategory"),
 
 ]

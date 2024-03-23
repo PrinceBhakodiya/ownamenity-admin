@@ -171,7 +171,7 @@ class OfferModel(models.Model):
 
 class refundModel(models.Model):
     return_id= models.IntegerField(primary_key=True)
-    order_id=models.IntegerField(max_length=10)
+    O_id=models.IntegerField(max_length=10)
     return_status=models.CharField(max_length=100)
     return_price=models.IntegerField()
     return_tran_id=models.CharField(max_length=20)
