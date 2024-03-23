@@ -44,12 +44,15 @@ def index(request):
                
         
 #         return HttpResponse(render(request,'login.html')) 
-def products(request,msg=""):
-    Pro_image= ProductImage.objects.all()
+def products(request, msg=""):
+    pro_images = ProductImage.objects.all()
     products = productModel.objects.all()
-    print(Pro_image)
+    subcats = subCatModel.objects.all()
+    print(pro_images)
     print(products)
-    return HttpResponse(render(request,'Product.html',{'products':products,'pro_img':Pro_image,"msg":msg}))
+    print(subcats)
+    return render(request, 'Product.html', {'products': products, 'pro_img': pro_images, 'subcats': subcats, 'msg': msg})
+
 def complaints(request):
     comps = complaintModel.objects.all()
     return HttpResponse(render(request,'complaints.html',{'comps':comps}))
