@@ -40,5 +40,10 @@ urlpatterns = [
     path('sub-cat',subcat,name="subcategory"),
     path('add_subCategory',add_subCategory,name="add_subCategory"),
     path('sub-cat/<int:Cate_id>',subcat,name="subcategory"),
+<<<<<<< HEAD
+    path('sub-cat/delete_subcate/<int:sub_cat_id>/<int:Cate_id>', delete_subcate, name='delete_subcat'),
+]
+=======
 
 ]
+>>>>>>> c3b78f66835d241bffa8c9bd13c7aedb7eb1a327
