@@ -1,8 +1,9 @@
 {% extends 'temp.html' %}
 
+{% load static %}
 {% block main %}    
 <h3>User List</h3>
-    <table class="table table-dark">
+    <table class="table table-striped ">
         <thead style="height: 80px;color: coral;">
           <tr>
             <!-- <th scope="col">id</th> -->
@@ -29,7 +30,7 @@
             <td>{{u.Password}}</td>
             <td>{{u.Address}}</td>
             <td>{{u.Pincode}}</td>
-            <td><img src={{u.Profile_pic}} alt="image" width="50" height="50"></td>
+            <td><img src="{% static u.Profile_pic %}" alt="hh" width="50" height="50"></td>
           </tr>
           {%endfor%}
         </tbody>

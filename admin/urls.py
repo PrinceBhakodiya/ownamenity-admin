@@ -6,8 +6,8 @@ from admin import views
 
 urlpatterns = [
   
-   #path('admin/', admin.site.urls),
-   # path('/login', login),
+    #path('admin/', admin.site.urls),
+    #path('/login', login),
     path('/home', home),  
     path('/product', products, name="products"),
     path('/Order', Orders, name="orders"),
@@ -18,7 +18,10 @@ urlpatterns = [
     path('/category',category,name='category'),
     path('/edit-product/<int:product_id>', edit_product, name='edit_product'),
     path('/delete-product/<int:product_id>', delete_product, name='delete_product'),
-  
+
+    path('/sub-cat/<int:Cate_id>',subcat,name="subcategory"),
+    
+    # path('refund-pay/<int:refund>',)
     # path('login', login),
 ]
 

@@ -1,0 +1,44 @@
+{% extends 'temp.html' %}
+view
+{% block main %} 
+
+<h3>Sub Category</h3>
+<center>
+<a  active href="{% url 'add_subCategory' %}" style="text-decoration: none;">
+  <button type="button" class="btn btn-secondary btn-sm" style="height: 50px;width: 200px;color: white;" >
+    Add Product
+  </button>
+  </a>
+</center>
+<br>
+<table class="table table-striped">
+    <thead style="height: 80px;color: coral;">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Size</th>
+        <th scope="col"> Color</th>
+        <th scope="col">Material_type</th>
+        <th scope="col">Product_type</th>
+        <th scope="col">Cate_id</th>
+                               
+      </tr>
+    </thead>
+    <tbody >
+    <hr>
+    {% for subcat in subcats %}
+    {%if cat_id == subcat.Cate_id %}
+      <tr>
+        <td>{{subcat.sub_cat_id}}</td>
+        <td>{{subcat.size}}</td>
+        <td>{{subcat.color}}</td>
+        <td>{{subcat.material_type}}</td>
+        <td>{{subcat.product_type}}</td>
+        <td>{{subcat.Cate_id}}</td>  
+        <td><a href="delete_subcate/{{subcat.sub_cat_id}}/{{cat_id}}">Delet</a></td>
+      </tr> 
+      {%endif%}
+    {%endfor%}
+  </tbody>
+
+  </table>
+{% endblock %}

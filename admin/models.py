@@ -77,15 +77,17 @@ class SelectedMaterial(models.Model):
         managed=False
         db_table = 'selected_mat'
 
-class productModel(models.Model):
+class  productModel(models.Model):
         # id = models.AutoField(primary_key=True)
     P_id = models.IntegerField(primary_key=True,max_length=10)
     P_name = models.CharField(max_length=30, null=False)
     P_desc = models.CharField(max_length=100, null=False)
     P_category_id = models.IntegerField(max_length=5,null=False)
+    P_subcat_id = models.IntegerField(max_length=10,null=False)
     P_curstock = models.IntegerField(max_length=10,null=False)
     P_price = models.IntegerField(max_length=10,null=False)
     P_rating = models.FloatField(null=False)
+    
     
     class Meta:
         managed=False
@@ -142,10 +144,11 @@ class CategoryModel(models.Model):
         managed=False
         db_table= 'category'
 class OrderProduct(models.Model):
-    O_id = models.IntegerField()
+    O_id = models.IntegerField(max_length=10)
     p_id = models.IntegerField()   
     p_name = models.IntegerField()   
     id = models.AutoField(primary_key=True) 
+    P_quantity = models.IntegerField() 
 
     class Meta:
         managed=False
@@ -165,4 +168,26 @@ class OfferModel(models.Model):
     class Meta:
         managed=False
         db_table = 'offer'
+
+class refundModel(models.Model):
+    return_id= models.IntegerField(primary_key=True)
+    O_id=models.IntegerField(max_length=10)
+    return_status=models.CharField(max_length=100)
+    return_price=models.IntegerField()
+    return_tran_id=models.CharField(max_length=20)
         
+    class Meta:
+        managed=False
+        db_table='order_refund_return'
+
+class subCatModel(models.Model):
+    sub_cat_id=models.IntegerField(primary_key=True)
+    size=models.CharField(max_length=20)
+    color=models.CharField(max_length=20)
+    material_type=models.CharField(max_length=20)
+    product_type=models.CharField(max_length=20)
+    Cate_id=models.IntegerField()
+
+    class Meta:
+        managed=False
+        db_table='sub_category'

@@ -1,0 +1,43 @@
+{% extends 'temp.html' %}
+
+{% block main %}  
+<<<<<<< HEAD
+<h3>Order Refund Table</h3>
+<table class="table table-whitess">
+=======
+<h3>order refund table</h3>
+<br>
+<table class="table table-striped">
+>>>>>>> ff9b473552304cdfd827ca8fc72474f69d37fc11
+    <thead style="height: 80px;color: coral;">
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">order_id</th>
+        <th scope="col">return_status</th>
+        <th scope="col">return_price</th>
+        <th scope="col">return_tran_id</th>
+                               
+      </tr>
+    </thead>
+    <tbody>
+    <hr>
+    {% for refund in refunds %}
+      <tr>
+        <td>{{refund.return_id}}</td>
+        <td>{{refund.O_id}}</td>
+        <td>{{refund.return_status}}</td>
+        <td>{{refund.return_price}}</td>
+        <td>{{refund.return_tran_id}}</td>
+        {% if refund.return_status == "complated" %}
+        <td><a href="https://dashboard.razorpay.com/app/payments">Refund</del></a></td>
+<<<<<<< HEAD
+=======
+       
+>>>>>>> ff9b473552304cdfd827ca8fc72474f69d37fc11
+        {% endif %}
+      </tr>
+    {%endfor%}
+  </tbody>
+
+  </table>
+{% endblock %}

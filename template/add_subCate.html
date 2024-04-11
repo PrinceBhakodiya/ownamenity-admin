@@ -1,0 +1,41 @@
+{% extends 'temp.html' %}
+
+{% block main %}
+<h2>Add category options</h2>
+<hr>
+<form method="post" action="" style="text-align: center;">
+    {% csrf_token %}
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="inputGroup-sizing-default"> Cate</span>
+      &nbsp; <select name="material_id" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        {% for cate in categories %}
+          <option name="Cate_id" value="{{ cate.Cate_id}}">{{ cate.Cate_name}}</option>
+        {% endfor %}
+      </select>
+    </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default"> product_type</span>
+        &nbsp; <input name="product_type" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default"> size</span>
+        &nbsp; <input name="size" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default"> material_type</span>
+        &nbsp; <input name="material_type" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default"> color</span>
+        &nbsp; <input name="color" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+     
+      
+      
+   <button type="submit" id="submit-btn" class="btn btn-secondary btn-sm" style="height: 50px;width: 200px;color: coral;" >
+    <span class="bi-plus-square-fill"></span>
+    <span class="bi bi-plus"></span>&nbsp;  submit  
+    </button>
+</form>
+
+{% endblock %}

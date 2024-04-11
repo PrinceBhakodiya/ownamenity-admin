@@ -1,25 +1,29 @@
 {% extends 'temp.html' %}
 
 {% block main %}
-<h2>Add Product</h2>
+<h2>Add Product </h2>
 <hr>
 <form method="post" action="add_product" style="text-align: center;">
     {% csrf_token %}
-    
     <div class="input-group mb-3">
       <span class="input-group-text" id="inputGroup-sizing-default">category</span>
       &nbsp;<select name="P_category_id" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
         {% for category in categories %}
-          <option name="P_category_id" value="{{ category.Cate_id }}">{{ category.Cate_name}}</option>
+          <option name="P_category_id" value="{{category.Cate_id}}">{{category.Cate_name}}</option>
         {% endfor %}
       </select>
     </div>
-      <div class="input-group mb-3">
-        <span class="input-group-text" id="inputGroup-sizing-default">P_id</span>
-        &nbsp; <input name="P_id" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-      </div>
-      
-   
+    
+   {{ category.name }}
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="inputGroup-sizing-default">Sub Detail</span>
+      &nbsp;<select name="sub_cat_id" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        {% for sub_detail in sub_cat %}
+          <option name="sub_cat_id" value="{{sub_detail.sub_cat_id}}">{{sub_detail.product_type}}| {{sub_detail.color}} | {{sub_detail.material_type}} | {{sub_detail.size}} </option>
+          {% endfor %}
+      </select>
+
+    </div>
       <div class="input-group mb-3">
         <span class="input-group-text" id="inputGroup-sizing-default" >P_name</span>
         &nbsp; <input name="name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
@@ -37,14 +41,9 @@
         &nbsp;<input name="P_price" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
       </div>
       <div class="input-group mb-3">
-        <span class="input-group-text" id="inputGroup-sizing-default">P_rating</span>
-        &nbsp;<input name="P_rating" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-      </div>
-      <div class="input-group mb-3">
         <span class="input-group-text" id="inputGroup-sizing-default">image</span>
-        &nbsp;<input name="image" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        &nbsp;<input name="image" type="file" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
       </div>
-      
    <button type="submit" class="btn btn-secondary btn-sm" style="height: 50px;width: 200px;color: coral;" >
         <span class="bi-plus-square-fill"></span>
         <span class="bi bi-plus"></span>&nbsp;  submit

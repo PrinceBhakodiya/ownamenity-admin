@@ -1,0 +1,14 @@
+{% extends 'temp.html' %}
+view
+{% block main %} 
+<h2>Refund Form</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="payment_id">Payment ID:</label><br>
+        <input type="text" id="payment_id" name="payment_id" required><br>
+        <label for="refund_amount">Refund Amount (in INR):</label><br>
+        <input type="number" id="refund_amount" name="refund_amount" required><br><br>
+        <input type="submit" value="Initiate Refund">
+    </form>
+
+{% endblock %}

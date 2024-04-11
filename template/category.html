@@ -9,23 +9,22 @@
     <span class="bi bi-plus"></span>&nbsp;  
   </button>
   </a>
-    <table class="table table-dark">
+    <table class="table table-striped">
         <thead style="height: 80px;color: coral;">
           <tr>
             <th scope="col">id</th>
-            <th scope="col">name</th>
-                                   
+            <th scope="col">name</th>                    
           </tr>
         </thead>
-        <tbody >
-
+        <tbody>
         <hr>
         {% for category in categories %}
           <tr>
             <td>{{category.Cate_id}}</td>
             <td>{{category.Cate_name}}</td>
+            <td><a href="sub-cat/{{category.Cate_id}}">sub categories</a></td>
             
-          </tr>
+          </tr> 
         {%endfor%}
       </tbody>
 

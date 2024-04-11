@@ -17,11 +17,12 @@ def login(request):
                           print(user_instance.name)
                           name = user_instance.name
                           position="admin"
+                          request.session['email'] = user_instance.email
                           return home(request,name,position)
                  else:
                           return render(request, 'login.html', {'error': 'Incorrect password'})
             except adminModel.DoesNotExist:
-                try:
+                try:        
                    user_instance = empModel.objects.get(emp_email=email_id)
                    if user_instance.password == passw:
                           print(user_instance.password)

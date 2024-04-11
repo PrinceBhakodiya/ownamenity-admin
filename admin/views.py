@@ -44,15 +44,17 @@ def index(request):
                
         
 #         return HttpResponse(render(request,'login.html')) 
-def products(request,msg=""):
-    Pro_image= ProductImage.objects.all()
+def products(request, msg=""):
+    pro_images = ProductImage.objects.all()
     products = productModel.objects.all()
-    print(Pro_image)
+    subcats = subCatModel.objects.all()
+    print(pro_images)
     print(products)
-    return HttpResponse(render(request,'Product.html',{'products':products,'pro_img':Pro_image,"msg":msg}))
+    print(subcats)
+    return render(request, 'Product.html', {'products': products, 'pro_img': pro_images, 'subcats': subcats, 'msg': msg})
+
 def complaints(request):
     comps = complaintModel.objects.all()
-    print(comps)
     return HttpResponse(render(request,'complaints.html',{'comps':comps}))
 def Orders(request):
     orders = ordersModel.objects.all()
@@ -71,56 +73,79 @@ def my_view(request):
 def add_product(request):
     if request.method == 'GET':
         category = CategoryModel.objects.all()
-        return render(request,'addProduct.html',{"categories":category})
+        sub_cat = subCatModel.objects.all()
+        return render(request,'addProduct.html',{"categories":category,"sub_cat":sub_cat})
     if request.method == 'POST':
-        P_id = request.POST['P_id']
-        print(P_id)
+        print("command :  it inside")
         p_image = request.POST['image']
         p_name = request.POST['name']
         P_desc = request.POST['P_desc']
         P_category_id = request.POST['P_category_id']
+        sub_cat_id = request.POST['sub_cat_id']
         P_curstock = request.POST['P_curstock']
         P_price = request.POST['P_price']
-        P_rating = request.POST['P_rating']
+        print("command :  it got post data")
+        print(p_image,p_name,P_desc,P_category_id,sub_cat_id,P_curstock,P_price,P_rating)
         try:
-            product= productModel.objects.create(P_id=P_id
-                                                 ,P_name=p_name
+            product= productModel.objects.create(
+                                                  P_name=p_name
                                                  ,P_desc=P_desc
                                                  ,P_category_id=P_category_id
+                                                 ,P_subcat_id=sub_cat_id
                                                  ,P_curstock=P_curstock
                                                  ,P_price=P_price
-                                                 ,P_rating=P_rating
+                                                 ,P_rating=1 
                                                )
-            product.save()
-            print("product done")
+            latest_product = productModel.objects.latest('P_id')
+            pid=latest_product.P_id
+            print(pid)
             try:
-                id=P_id
-                pro_image= ProductImage.objects.create(p_id=id
-                                                    ,p_img_id=P_id
+                pro_image= ProductImage.objects.create(p_id=pid
                                                     ,p_img_link=p_image
                                                     )
-                pro_image.save()
                 return products(request,msg="product added")
             except Exception as e:
                 print(e)
                 return render(request, 'addProduct.html')
         except:
             return render(request, 'addProduct.html')
+def add_subCategory(request):
+    if request.method == 'GET':
+        category = CategoryModel.objects.all()
+        return render(request,'add_subCate.html',{"categories":category})
+    if request.method == 'POST':
+        print("command :  it inside")
+        Cate_id = request.POST['Cate_id']
+        product_type = request.POST['product_type']
+        material_type = request.POST['material_type']
+        color = request.POST['color']
+        size = request.POST['size']
+        print("command :  it got post data")
+        product= subCatModel.objects.create(      Cate_id=Cate_id
+                                                 ,product_type=product_type
+                                                 ,material_type=material_type
+                                                 ,color=color
+                                                 ,size=size
+                                               )
+        return render(request, 'add_subCate.html')
 def delete_product(request, product_id):
     product = get_object_or_404(productModel, P_id=product_id)
     product.delete()
-    return products(request,msg="product removed") 
+    return redirect('/product')
 
 def edit_product(request,product_id):
      if request.method == 'GET':
         data= productModel.objects.get(P_id=product_id)
+        dataimage= ProductImage.objects.get(p_id=product_id)
         category = CategoryModel.objects.all()
-        return render(request,'editProduct.html',{"data":data,"categories":category})
+        return render(request,'editProduct.html',{"data":data,"categories":category,"dataimage":dataimage})
 
      if request.method == 'POST':
         P_id = request.POST['P_id']
         p_name = request.POST['name']
         p_image = request.POST['P_image']
+        print("image name")
+        print(p_image)
         P_desc = request.POST['P_desc']
         P_category_id = request.POST['P_category_id']
         P_curstock = request.POST['P_curstock']
@@ -133,10 +158,14 @@ def edit_product(request,product_id):
             product.P_category_id=P_category_id
             product.P_curstock=P_curstock
             product.P_price=P_price
-            product.P_rating=P_rating 
+            product.P_rating=P_rating
            # productI= ProductImage.objects.get(P_id=P_id)
            # productI.p_img_link=p_image
             product.save()
+            if(p_image != ""):
+             productImg= ProductImage.objects.get(p_id=P_id)
+             productImg.p_img_link=p_image
+             productImg.save()
             #productI.save()
             return HttpResponse(render(request,'editProduct.html',{"msg":"Product Updated Successfully"}))
         except Exception as e:
@@ -150,20 +179,18 @@ def category(request):
 def custMat(request):
     Materials = CustMaterial.objects.all()
     return HttpResponse(render(request,'CustMat.html',{"Materials":Materials}))
-def offer(request):
-    details = OfferModel.objects.all()
-    return HttpResponse(render(request,'offer.html',{"details":details}))
+# def offer(request):
+#     details = OfferModel.objects.all()
+#     return HttpResponse(render(request,'offer.html',{"details":details}))
 def MatType(request,mateid,msg=""):
     Materials = MaterialType.objects.all()
     print(mateid)
     return HttpResponse(render(request,'MateType.html',{"Materials":Materials,"matId":mateid,"msg":msg}))
 def add_Category(request):
      if request.method == 'POST':
-        c_id = request.POST['C_id']
         c_name = request.POST['C_name']
         try:
-            categor= CategoryModel.objects.create(Cate_id=c_id,Cate_name=c_name)
-            categor.save()
+            categor= CategoryModel.objects.create(Cate_name=c_name)
             return category(request)
         except Exception as e:
             print(e)
@@ -175,11 +202,9 @@ def add_CustMat(request):
 
      if request.method == 'POST':
         Cate_id = request.POST['Cate_id']
-        material_id = request.POST['material_id']
         material_name = request.POST['material_name']
         try:
-            categor= CustMaterial.objects.create(Cate_id=Cate_id,material_id=material_id,material_name=material_name)
-            categor.save()
+            categor= CustMaterial.objects.create(Cate_id=Cate_id,material_name=material_name)
             return custMat(request)
         except Exception as e:
             print(e)
@@ -190,22 +215,18 @@ def add_MateOpt(request):
         return render(request,'addMateOpt.html',{"materials":materials})
      if request.method == 'POST':
         Cate_id = request.POST['material_id']
-        mate_cat_id = request.POST['type_id']
         mat_price = request.POST['price']
         mat_type=request.POST['name']
         mat_img=request.POST['image']
         mat_color=request.POST['color']
         print(Cate_id)
-        print(mate_cat_id)
         try:
             categor= MaterialType.objects.create(material_id=Cate_id,
-                                                 mate_cat_id=mate_cat_id,
                                                  mat_price=mat_price,
                                                  mat_type=mat_type,
                                                  mat_img=mat_img,
                                                  mat_color=mat_color,
                                                  )
-            categor.save()
             print("adddone")
             return MatType(request,msg="add")
         except Exception as e:
@@ -227,7 +248,8 @@ def edit_MateOpt(request,mate_cat_id):
             mate= MaterialType.objects.get(mate_cat_id=mate_cat_id)
             mate.mat_price=mat_price
             mate.mat_type=mat_type
-            mate.mat_img=mat_img
+            if(mat_img != ""):
+             mate.mat_img=mat_img
             mate.mat_color=mat_color
             mate.save()
             return HttpResponse(render(request,'editMateOpt.html',{"msg":"Product Updated Successfully"}))
@@ -240,4 +262,23 @@ def delete_MatOpt(request,mate_cat_id,mateid):
         product.delete()
         print("deleted")
         return MatType(request,msg="Option Removed",mateid=mateid)
-   
+def refunds(request):
+    refund = refundModel.objects.all()
+    return HttpResponse(render(request,'refund.html',{"refunds":refund}))
+def order_products(request,order_id):
+     if request.method == 'GET':
+        data = OrderProduct.objects.all()
+        return render(request,'order_product.html',{"data":data,"id":order_id})
+
+     
+def subcat(request,Cate_id):
+    if request.method == 'GET':
+        subcat = subCatModel.objects.all()
+        print(Cate_id)
+        categorys=Category.objects.get(cate_id=Cate_id)
+        return HttpResponse(render(request,'subCategory.html',{"subcats":subcat,"cat_id":Cate_id}))     
+def delete_subcate(request, sub_cat_id, Cate_id):
+    data = get_object_or_404(subCatModel, sub_cat_id=sub_cat_id)
+    data.delete()
+    print("deleted")
+    return subcat(request, msg="category remove", Cate_id=Cate_id)

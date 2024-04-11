@@ -35,18 +35,18 @@ view
                
         <tbody >
    
-        {%for detail in details%}
+        {% for detail in details %}
         
           <tr>
-            <td>{{product.offer_id}}</td>
-            <td>{{product.offer_name}}</td>
-            <td>{{product.p_id}}</td>
-            <td>{{product.offer_type}}</td>
-            <td>{{product.discount_value}}</td>
-            <td>{{product.start_date}}</td>
-            <td>{{product.end_date}}</td>
-            <td>{{product.isActive}}</td>
-            <td>{{product.description}}</td>
+            <td>{{detail.offer_id}}</td>
+            <td>{{detail.offer_name}}</td>
+            <td>{{detail.p_id}}</td>
+            <!-- <td>{{detail.offer_type}}</td>  -->
+            <td>{{detail.discount_value}}</td>
+            <td>{{detail.start_date}}</td>
+            <td>{{detail.end_date}}</td>
+            <td>{{detail.isActive}}</td>
+            <td>{{detail.description}}</td>
            
             <td><a href="edit-product/{{product.P_id}}">Edit</del></a></td>
             <td><a href="delete-product/{{product.P_id}}">Delete</del></a></td>
