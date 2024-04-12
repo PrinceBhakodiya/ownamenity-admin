@@ -62,7 +62,7 @@ class Category(models.Model):
 
 class Orders(models.Model):
         # id = models.AutoField(primary_key=True)
-    O_id = models.TextField(primary_key=True)  # Primary key field
+    O_id = models.AutoField(primary_key=True)  # Primary key field
     Cust_id = models.IntegerField(max_length=10,null=False)
     o_date = models.DateField(null=False)
     o_address = models.CharField(max_length=100,null=False)
@@ -139,13 +139,13 @@ class CartProduct(models.Model):
         db_table = 'cart_product'
    
 class OrderStatus(models.Model):
-    o_id = models.TextField(primary_key=True,db_column="o_id")
-    order_no = models.ForeignKey(Cart, on_delete=models.CASCADE,db_column='order_id')
+    o_id = models.ForeignKey(Orders, on_delete=models.CASCADE,db_column='o_id')
+    order_no = models.TextField(db_column='order_id')
     order_exp_date= models.DateField(auto_now_add=True, db_column='order_exp_date')
     delivery_date = models.DateField(auto_now_add=True, db_column='delivery_date')
     order_status= models.TextField( db_column='order_status')
 
     class Meta:
         managed = False
-        db_table = 'order_status'
+        db_tabl = 'order_status'
    

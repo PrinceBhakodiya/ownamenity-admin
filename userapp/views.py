@@ -292,17 +292,18 @@ def checkout(request):
                 o_type="standard",
             )
             # Create order products
+            print(order.O_id)
+
             for cart_product in cart_products:
                 OrderProduct.objects.create(
                     order_id=order,  # Assign the entire order object
                     p_id=cart_product.P_id, 
                 )
-
             # Empty the cart after checkout
             cart_products.delete()
-            OrderStatus.objects.create(order_no=order.o_id, status="Confirmed")
+            OrderStatus.objects.create(o_id=order, order_status="Confirmed")
 
-            return JsonResponse({"msg": "Order placed successfully", "order_id": order.o_id}, status=200)
+            return JsonResponse({"msg": "Order placed successfully", "order_id": order.O_id}, status=200)
 
         except Cart.DoesNotExist:
             return JsonResponse({"error": "Cart not found"}, status=404)
