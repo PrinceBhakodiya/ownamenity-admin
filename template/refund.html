@@ -1,14 +1,9 @@
 {% extends 'temp.html' %}
 
 {% block main %}  
-<<<<<<< HEAD
-<h3>Order Refund Table</h3>
-<table class="table table-whitess">
-=======
 <h3>order refund table</h3>
 <br>
 <table class="table table-striped">
->>>>>>> ff9b473552304cdfd827ca8fc72474f69d37fc11
     <thead style="height: 80px;color: coral;">
       <tr>
         <th scope="col">id</th>
@@ -30,10 +25,8 @@
         <td>{{refund.return_tran_id}}</td>
         {% if refund.return_status == "complated" %}
         <td><a href="https://dashboard.razorpay.com/app/payments">Refund</del></a></td>
-<<<<<<< HEAD
-=======
+
        
->>>>>>> ff9b473552304cdfd827ca8fc72474f69d37fc11
         {% endif %}
       </tr>
     {%endfor%}
