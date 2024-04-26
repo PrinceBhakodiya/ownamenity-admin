@@ -1,6 +1,7 @@
 {% extends 'temp.html' %}
 
 {% block main %}    
+<h1>Complaints </h1>
     <table class="table table-striped">
         <thead style="height: 80px;color: coral;">
           <tr>
@@ -11,7 +12,6 @@
             <th scope="col">description</th>
             </tr>
         </thead>
-        <hr>
         <tbody >
             {% for complaint in comps %}
           <tr>

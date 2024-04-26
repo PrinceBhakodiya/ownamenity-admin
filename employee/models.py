@@ -18,7 +18,6 @@ class empModel(models.Model):
 
 class statusModel(models.Model):
     o_id = models.IntegerField(primary_key=True)
-    order_id = models.IntegerField(unique=True)
     order_exp_date = models.DateField()
     delivery_date = models.DateField()
     order_status = models.CharField(max_length=50)

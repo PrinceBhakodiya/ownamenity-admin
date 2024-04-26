@@ -26,9 +26,7 @@ SECRET_KEY = 'django-insecure-_b21xpu^61tw*yi$=7_#)1f_%t=z-&nkvpd^pyec%8zjzbnyp(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-
-ALLOWED_HOSTS = ['127.0.0.1',"localhost","192.168.43.117","192.168.1.5","192.168.212.175","192.168.1.77"]
-
+ALLOWED_HOSTS = ['127.0.0.1',"192.168.148.10","192.168.67.10","localhost","192.168.22.10","192.168.43.117","192.168.1.5","192.168.212.175","192.168.1.77"]
 
 # Application definition
 
@@ -56,7 +54,6 @@ MIDDLEWARE = [
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'users.backends.CustomUserBackend',
-
 ]
 
 ROOT_URLCONF = 'ownamenity.urls'

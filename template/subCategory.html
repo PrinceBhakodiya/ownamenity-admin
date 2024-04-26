@@ -11,6 +11,7 @@ view
   </a>
 </center>
 <br>
+&nbsp;  
 <table class="table table-striped">
     <thead style="height: 80px;color: coral;">
       <tr>
@@ -24,7 +25,6 @@ view
       </tr>
     </thead>
     <tbody >
-    <hr>
     {% for subcat in subcats %}
     {%if cat_id == subcat.Cate_id %}
       <tr>
@@ -34,7 +34,7 @@ view
         <td>{{subcat.material_type}}</td>
         <td>{{subcat.product_type}}</td>
         <td>{{subcat.Cate_id}}</td>  
-        <td><a href="delete_subcate/{{subcat.sub_cat_id}}/{{cat_id}}">Delet</a></td>
+        <td><a href="delete_subcate/{{subcat.sub_cat_id}}/{{cat_id}}">Delete</a></td>
       </tr> 
       {%endif%}
     {%endfor%}

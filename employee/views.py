@@ -10,11 +10,16 @@ def Employe_Hom(request,name=None,position=""):
     T_return= refundModel.objects.count()         
     return HttpResponse(render(request,'home_emp.html',{'position':position,'name':name,'admin':modeldt,'Tot_return':T_return,'Tot_ord':T_ord}))
 
-def order(request):
+def order(request)  :
     orders = ordersModel.objects.all()
     status = statusModel.objects.all()
     return HttpResponse(render(request,'orderList_emp.html',{'orders':orders,"statuses":status}))
-# Create your views here.
+
+def cust_req(request):
+    orders = Customization_req.objects.filter(c_status="panding")
+    print(orders)
+    return HttpResponse(render(request,'cust_req.html',{'orders':orders}))
+
 def edit_status(request,order_id):
      if request.method == 'GET':
         data= statusModel.objects.get(o_id=order_id)

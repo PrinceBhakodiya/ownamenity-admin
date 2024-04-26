@@ -1,0 +1,59 @@
+<h3>Order Report</h3>
+<form method="POST" action="">
+  {% csrf_token %}
+    <label for="start_date">Start Date:</label>
+    <input type="date" id="start_date" name="start_date">
+    <label for="end_date">End Date:</label>
+    <input type="date" id="end_date" name="end_date">
+    <button type="submit">Search</button>
+</form>
+<br>
+<table>
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Customer ID</th>
+            <th scope="col">Order Date</th>
+            <th scope="col">Address</th>
+            <th scope="col">Total Amount</th>
+            <th scope="col">Discount</th>
+            <th scope="col">Payment Method</th>
+            <th scope="col">Type</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        {% if start_date and end_date %}
+        {% with order_date=order.O_date|date:"Y-m-d" %}
+        {% if order_date >= start_date and order_date <= end_date %}
+        <tr>
+            <td>{{ order.O_id }}</td>
+            <td>{{ order.Cust_id }}</td>
+            <td>{{ order.O_date }}</td>
+            <td>{{ order.O_address }}</td>
+            <td>{{ order.o_total_amt }}</td>
+            <td>{{ order.o_disc_price }}</td>
+            <td>{{ order.O_payment_mtd }}</td>
+            <td>{{ order.O_type }}</td>
+            <td><a href="{% url 'order_products' order.O_id %}">Products</a></td>
+        </tr>
+        {% endif %}
+        {% endwith %}
+        {% else %}
+        <tr>
+            <td>{{ order.O_id }}</td>
+            <td>{{ order.Cust_id }}</td>
+            <td>{{ order.O_date }}</td>
+            <td>{{ order.O_address }}</td>
+            <td>{{ order.o_total_amt }}</td>
+            <td>{{ order.o_disc_price }}</td>
+            <td>{{ order.O_payment_mtd }}</td>
+            <td>{{ order.O_type }}</td>
+            <td><a href="{% url 'order_products' order.O_id %}">Products</a></td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+    </div>

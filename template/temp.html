@@ -7,11 +7,47 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     
     <style>
+         /* Apply basic styles to form elements */
+.form-container {
+    display: flex; /* Use flexbox for layout */
+    flex-direction: row; /* Arrange items horizontally */
+    justify-content: space-between; /* Space items evenly along the main axis */
+    align-items: center; /* Center items vertically */
+    margin-bottom: 20px; /* Add spacing below the form */
+}
+
+/* Style form labels */
+.form-container label {
+    font-weight: bold; /* Make labels bold */
+    margin-right: 10px; /* Add right margin for spacing */
+}
+
+/* Style form input fields */
+.form-container input[type="number"] {
+    width: 150px; /* Set input field width */
+    height: 40px; /* Set input field height */
+    padding: 5px; /* Add internal padding */
+    border: 1px solid #ccc; /* Add border with light gray color */
+    border-radius: 5px; /* Round the corners of the input */
+}
+
+/* Style form button */
+.form-container button {
+    padding: 10px 20px; /* Add padding inside the button */
+    background-color: #333; /* Set background color (blue) */
+    color: #fff; /* Set text color (white) */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Round the corners of the button */
+    cursor: pointer; /* Show pointer cursor on hover */
+}
+
+/* Hover effect for button */
+.form-container button:hover {
+    background-color: #FF7518; /* Darker blue on hover */
+}
+
         .navbar {
             background-color: #FF7518;
-        }
-        .headbar{
-            position: fixed !important;
         }
         .navbar-brand {
             font-weight: bold;
@@ -26,6 +62,16 @@
             height: 100%;
             margin-top: -24px;
             width: 400px;
+            margin-top: 45px;  
+        }
+        .main-content{
+            position: fixed;
+            top: 70px; 
+            left: 280px; 
+            padding-top: 20px;
+            width: calc(100% - 280px); 
+            bottom: 0;
+            overflow-y: auto;
         }
 
         .sidebar-sticky {
@@ -63,7 +109,7 @@
     <a class="navbar-brand" href="">OwnAmenity</a>
     
 </div> -->
-<div style="background-color: #FF7518; width:100%;height: 70px; color:white; font-size: 25px; text-align: left;padding: 15px; font-family:Arial, Helvetica, sans-serif;font-weight: bold;">
+<div style="position: fixed;background-color: #FF7518; width:100%;height: 70px; color:white; font-size: 25px; text-align: left;padding: 15px; font-family:Arial, Helvetica, sans-serif;font-weight: bold;margin-top: -25px;">
     Own Amenity </div>
 <div class="container-fluid mt-4" style="margin-top: 50px;">
     <div class="row">
@@ -80,6 +126,9 @@
                         <a class="nav-link" style="font-size: 20px;" href="/Order">Order</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" style="font-size: 20px;" href="/customize_requests">Customize Requests</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" style="font-size: 20px;" href="/emp">Employees</a>
                     </li>
                     <li class="nav-item">
@@ -90,6 +139,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" style="font-size: 20px;" href="/category">Category</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="font-size: 20px;" href="/offer">Offers</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" style="font-size: 20px;"href="/complaints">Complaints</a>
@@ -110,7 +162,7 @@
             </div>
         </nav>
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <main role="main" class="main-content" class="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <!-- Your page content goes here -->
                 {% block main %}
                 

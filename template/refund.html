@@ -11,11 +11,10 @@
         <th scope="col">return_status</th>
         <th scope="col">return_price</th>
         <th scope="col">return_tran_id</th>
-                               
+        <th></th>                       
       </tr>
     </thead>
     <tbody>
-    <hr>
     {% for refund in refunds %}
       <tr>
         <td>{{refund.return_id}}</td>
@@ -23,10 +22,8 @@
         <td>{{refund.return_status}}</td>
         <td>{{refund.return_price}}</td>
         <td>{{refund.return_tran_id}}</td>
-        {% if refund.return_status == "complated" %}
+        {% if refund.return_status == "complete" %}
         <td><a href="https://dashboard.razorpay.com/app/payments">Refund</del></a></td>
-
-       
         {% endif %}
       </tr>
     {%endfor%}

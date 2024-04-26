@@ -1,0 +1,23 @@
+{% extends 'temp.html' %}
+{% block main %}
+<h3>Materials:</h3>
+<br>
+<hr>
+<div style="display: flex; flex-wrap: wrap; gap: 20px;">
+    {% for matid in matIds %}
+        {% for matdetail in matDetails %}
+            {% if matdetail.mate_cat_id == matid.material_id %}
+                <div style="display: flex; align-items: center; background-color: #f9f9f9; padding: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+                    <img src="{{ matdetail.mat_img }}" alt="{{ matdetail.mat_img }}" width="50" height="50">
+                    <div style="margin-left: 20px;">
+                        <h3>Name: {{ matdetail.mat_type }}</h3>
+                        <p>Color: {{ matdetail.mat_color }}</p>
+                        <p>Price: {{ matdetail.mat_price }}</p>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+</div>
+
+    {% endblock %}

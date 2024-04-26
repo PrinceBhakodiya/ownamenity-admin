@@ -2,8 +2,23 @@
 
 {% block main %}    
 <h3>Orders</h3>
-<br>
+<hr>
+<h5>search :</h5>
+<form method="post" action="{% url 'Order' %}" style="margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background-color: #f9f9f9; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;">
+  {% csrf_token %}
+  
+  <div style="flex: 1 0 48%; margin-right: 10px;">
+    <label for="start_date" style="display: block; margin-bottom: 8px;">Start Date:</label>
+    <input type="date" id="start_date" name="start_date" style="width: 100%; padding: 8px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px;">
+  </div>
+  
+  <div style="flex: 1 0 48%; margin-left: 10px;">
+    <label for="end_date" style="display: block; margin-bottom: 8px;">End Date:</label>
+    <input type="date" id="end_date" name="end_date" style="width: 100%; padding: 8px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px;">
+  </div>
 
+  <button type="submit" style="margin-top: 10px; padding: 8px; font-size: 16px; background-color: #FF7518; color: white; border: none; border-radius: 4px; cursor: pointer; width: 40%; margin-left: auto; margin-right: auto;margin-top: 20px;">Search</button>
+</form><br>
     <table class="table table-striped">
         <thead style="height: 80px;color: black;">
           <th>
@@ -18,7 +33,7 @@
             <th scope="col" ></th>   
            </tr>
         </thead>
-        <hr>
+        
         
         <tbody >{% for order in orders %}
          
@@ -32,7 +47,14 @@
               <td>{{ order.o_disc_price }}</td>
               <td>{{ order.O_payment_mtd }}</td>
               <td>{{ order.O_type }}</td>
-              <td><a href="order-products/{{order.O_id}}">Products</a></td>
+              <td>
+                  {% if order.O_type == "standard" %}
+                      <a href="order-products/{{ order.O_id }}">Products</a>
+                  {% else %}
+                  <a href="selected-materials/{{ order.O_id }}">Details</a>
+                  {% endif %}
+              </td>
+
               </tr>
          
         {% endfor %}

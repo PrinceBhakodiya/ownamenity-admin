@@ -1,0 +1,79 @@
+{% extends 'temp.html' %}
+
+{% block main %}
+{% load static %}
+
+<h2>Add Offer </h2>
+<hr>
+    <form method="post" action="{% url 'add_offer' %}">
+        {% csrf_token %}
+        
+        <div class="input-group mb-3">
+        <label class="input-group-text" id="inputGroup-sizing-default" for="offer_name">Offer Name:</label>
+        &nbsp; <input class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" type="text" id="offer_name" name="offer_name" required><br><br>
+        </div>
+        <div class="input-group mb-3">
+        <label class="input-group-text" id="inputGroup-sizing-default" for="offer_type">Offer Type:</label>
+        &nbsp; <input class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" type="text" id="offer_type" name="offer_type" required><br><br>
+        </div>
+        <div class="input-group mb-3">
+        <label class="input-group-text" id="inputGroup-sizing-default" for="discount_value">Discount Value( In %) :</label>
+        &nbsp; <input class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" type="number" id="discount_value" name="discount_value" step="0.01" required><br><br>
+        </div>
+        <div class="input-group mb-3">
+        <label class="input-group-text" id="inputGroup-sizing-default" for="start_date">Start Date:</label>
+        &nbsp; <input  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" type="date" id="start_date" name="start_date" required><br><br>
+        </div>
+        <div class="input-group mb-3">
+        <label class="input-group-text" id="inputGroup-sizing-default" for="end_date">End Date:</label>
+        &nbsp; <input class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" type="date" id="end_date" name="end_date" required><br><br>
+        </div>
+        <label class="input-group-text" id="inputGroup-sizing-default" for="description">Description:</label>
+        &nbsp; <textarea class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="description" name="description" rows="4" cols="50" required></textarea><br>
+        <fieldset style="text-align: center;">
+          <hr>
+          <legend>Select Products To Give Offer:</legend>
+
+          <br>
+          <!-- "Select All" Checkbox -->
+          <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="select_all_products" onclick="selectAllProducts()">
+              <label class="form-check-label" for="select_all_products">Select All</label>
+          </div>
+          <br>
+      
+          <!-- Product Checkboxes with Labels and Images (Centered with Borders) -->
+          {% for product in products %}
+          <div style="display: inline-block; width: 30%; margin-bottom: 20px; border: 1px solid #ccc; padding: 10px;">
+              <input class="form-check-input" type="checkbox" id="product_{{ product.P_id }}" name="products" value="{{ product.P_id }}" style="transform: scale(1.5); margin-right: 10px;margin-top: 15px;">
+              &nbsp;<b><label style="font-size: 16px;" for="product_{{ product.P_id }}">{{ product.P_name }}</label></b>
+              {% for image in pro_img %}
+              {% if image.p_id == product.P_id %}
+              &nbsp; &nbsp; &nbsp;
+              <img src="{% static image.p_img_link %}" alt="{{ image.p_img_link }}" width="50" height="50">
+              {% endif %}
+              {% endfor %}
+          </div>
+          {% if forloop.counter|divisibleby:3 and not forloop.last %}
+          <br> <!-- Add a line break after every third product -->
+          {% endif %}
+          {% endfor %}
+      </fieldset>
+      <br>
+       <center> <button type="submit" class="btn btn-secondary btn-sm" style="height: 50px;width: 200px;color: coral;" >
+          <span class="bi-plus-square-fill"></span>
+          <span class="bi bi-plus"></span >&nbsp;  submit
+      </button>    
+    </center>
+    <br>
+    </form>
+{% endblock %}
+<script> 
+  function selectAllProducts() {
+        const selectAllCheckbox = document.getElementById('select_all_products');
+        const productCheckboxes = document.querySelectorAll('product-checkbox');
+        productCheckboxes.forEach(function(checkbox) {
+            checkbox.checked = selectAllCheckbox.checked;
+        });
+    }
+</script>

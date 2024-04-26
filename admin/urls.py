@@ -11,6 +11,7 @@ urlpatterns = [
     path('/home', home),  
     path('/product', products, name="products"),
     path('/Order', Orders, name="orders"),
+    path('/rpt', report, name="rpt"),
     path('/User_List', User_List, name="user"),
     path('/emp', emp, name="emp"),
     #path('addProduct', add_product, name='add_product'),

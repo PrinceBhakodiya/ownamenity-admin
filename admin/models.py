@@ -52,10 +52,11 @@ class CustMaterial(models.Model):
     Cate_id = models.IntegerField(db_index=True)
     material_id = models.AutoField(primary_key=True)
     material_name = models.CharField(max_length=30)
-
+    
     class Meta:
         managed=False
         db_table = 'cust_martial'
+
 class MaterialType(models.Model):
     mate_cat_id = models.AutoField(primary_key=True)
     material_id = models.IntegerField(db_index=True)
@@ -72,7 +73,7 @@ class SelectedMaterial(models.Model):
     customization_id = models.IntegerField(db_index=True)
     material_id = models.IntegerField(db_index=True)
     mate_desc = models.CharField(max_length=50)
-
+    O_id = models.IntegerField()
     class Meta:
         managed=False
         db_table = 'selected_mat'
@@ -109,7 +110,21 @@ class ordersModel(models.Model):
         managed=False
         db_table = 'orders'
 
+from django.db import models
 
+class Customization_req(models.Model):
+    Cust_id = models.IntegerField(primary_key=True)  # Primary key field
+    customization_id = models.IntegerField(unique=True)  # Primary key field
+    c_name = models.CharField(max_length=20)  # Field for customization name
+    c_desc = models.CharField(max_length=200)  # Field for customization description
+    c_dimen = models.CharField(max_length=10)  # Field for customization dimensions
+    c_img = models.CharField(max_length=200)  # Field for customization image URL
+    c_date = models.DateField()  # Field for customization date
+    c_status = models.CharField(max_length=10)  # Field for customization status
+    class Meta:
+        managed=False
+        db_table = 'customization_request'
+    
 class UserModel(models.Model):
         # id = models.AutoField(primary_key=True)
     Cust_id = models.IntegerField(max_length=10,primary_key=True)
@@ -153,18 +168,26 @@ class OrderProduct(models.Model):
     class Meta:
         managed=False
         db_table = 'order_product'
+class statusModel(models.Model):
+    o_id = models.IntegerField(primary_key=True)
+    order_exp_date = models.DateField()
+    delivery_date = models.DateField()
+    order_status = models.CharField(max_length=50)
+    emp_id = models.IntegerField()
 
+    class Meta:
+        managed=False
+        db_table = 'order_status'
 class OfferModel(models.Model):
     offer_id = models.AutoField(primary_key=True)
     offer_name = models.CharField(max_length=20)
     p_id = models.IntegerField()
     offer_type = models.CharField(max_length=50)
-    discount_value = models.DecimalField(max_digits=10, decimal_places=2)
+    discount_per = models.IntegerField()
     start_date = models.DateField()
     end_date = models.DateField()
     isActive = models.BooleanField(default=True)
     description = models.CharField(max_length=100)
-
     class Meta:
         managed=False
         db_table = 'offer'

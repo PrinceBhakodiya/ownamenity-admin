@@ -1,137 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>OwnAmenity</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OwnAmenity - Log In</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         body {
             background-color: #FF7518;
             color: black;
             font-family: Arial, Helvetica, sans-serif;
-            line-height: 1.4;
-            font-size: 0.6em;
+            line-height: 1.6;
         }
 
         .login-form-container {
-            position: fixed;
+            position: absolute;
             top: 50%;
             left: 50%;
-            transform: translateY(-50%) translateX(-50%);
-            width: 40%;
-            height: 60%;
-            border-radius: 3px;
-            background-color: white;
-            overflow: hidden;
-            animation: shake 0.35s normal forwards ease-in-out;
+            transform: translate(-50%, -50%);
+            width: 350px;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow added */
+            transition: box-shadow 0.3s ease; /* Smooth transition for box shadow */
         }
 
-        fieldset {
-            border: none;
-        }
-
-        .input-wrapper {
-            position: relative;
-            display: block;
-            margin: 2em auto;
-            /* border-bottom: 1px solid #FC7148; */
-            border-radius: 3px;
-            width: 70%;
-            /* padding:20px; */
-            /* padding-left: 20px; */
-        }
-.btnlogin{
-  background-color: #FF7518;
-  border: none;
-}
-        input {
-            width: 100%;
-            line-height: 2;
-            background-color: transparent;
-            border: none;
-            padding: .6em .5em;
-            outline: 0;
-        }
-
-        input::-webkit-input-placeholder, input::-moz-placeholder, input:-ms-input-placeholder {
-            color: #9EA2AB;
-        }
-
-        /* .input-wrapper:before {
-            font-family: FontAwesome;
-            position: absolute;
-            display: inline-block;
-            top: 9px;
-            left: 8px;
-            font-size: 10px;
-            color: #3b3d3f;
-        } */
-/* 
-        .input-wrapper:nth-child(1):before {
-            content: "\f007";
-        }
-
-        .input-wrapper:nth-child(2):before {
-            content: "\f023";
-        } */
-
-        p {
+        .form-title {
             text-align: center;
-            color: red;
-        }
-.h3l{
-  padding: 10px;
-}
-        button {
-            outline: 0;
-            font-size: 14px;
-            letter-spacing: 0.1em;
-            background-color: #FC7148;
-            color: black;
-            border: none;
-            border-radius: 3px;
-            width: 200px;
-            padding: 1em 0;
-            margin: 2em auto;
-            display: block;
-            border-top: 2px solid transparent;
-            border-bottom: 2px solid transparent;
-        }
-.btnlogin:hover{
-  background-color: #FF7518;
-}
-        button:hover {
-            border-bottom-color: darken(#FC7148, 25);
+            margin-bottom: 30px;
         }
 
-        /* @keyframes shake {
-            0% { margin-left: 0 }
-            12% { margin-left: 0 }
-            25% { margin-left: -10px }
-            50% { margin-left: 10px }
-            75% { margin-left: -10px }
-            87% { margin-left: 0 }
-            100% { margin-left: 0 }
-        } */
+        .form-group {
+            margin-bottom: 20px;
+            position: relative; /* Required for positioning the placeholder label */
+        }
+
+        .form-control {
+            height: 50px;
+            font-size: 16px;
+            border: none;
+            border-bottom: 2px solid #ccc; /* Bottom border style */
+            transition: border-color 0.3s ease;
+            padding-top: 20px; /* Add padding top to create space for floating label */
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #FF7518; /* Change border color on focus */
+        }
+
+        /* Placeholder label style */
+        .placeholder-label {
+            position: absolute;
+            top: 10px; /* Adjust top position */
+            left: 10px; /* Adjust left position */
+            font-size: 14px;
+            color: #555;
+            transition: top 0.3s ease, font-size 0.3s ease;
+            pointer-events: none; /* Ensure the label doesn't interfere with input focus */
+        }
+
+        /* Floating label animation */
+        .form-control:focus + .placeholder-label,
+        .form-control:not(:placeholder-shown) + .placeholder-label {
+            top: 0;
+            font-size: 12px;
+        }
+
+        .btn-login {
+            background-color: #FF7518;
+            color: #fff;
+            font-weight: bold;
+            width: 100%;
+            height: 50px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-login:hover {
+            background-color: #FF5E00;
+        }
     </style>
 </head>
 <body>
 
-<div id="login" class="login-form-container">
-    <h3 class="text-center h3l">Login</h3>
-    <form method="post" action="login" class="text-center">
+<div class="login-form-container">
+    <h3 class="form-title">Log In</h3>
+    <form method="post" action="login">
         {% csrf_token %}
-        <div class="input-wrapper">
-            
-            <input type="text" class="form-control" placeholder="Your Email" name="email"/>
+        <div class="form-group">
+            <input type="email" class="form-control" placeholder="Your Email" name="email" required>
         </div>
-        <div class="input-wrapper">
-            <input type="password" class="form-control" placeholder="Password" name="password"/>
+        <div class="form-group">
+            <input type="password" class="form-control" placeholder="Password" name="password" required>
         </div>
-        <button id="continue" type="submit" class="btn btn-primary btnlogin">Login</button>
+        <button type="submit" class="btn btn-login">Login</button>
     </form>
-
+    &nbsp;
     {% if error %}
-        <p>{{ error }}</p>
+       <center> <b> <h5  class="text-danger">{{ error }}</h5></b></center>
     {% endif %}
 </div>
 

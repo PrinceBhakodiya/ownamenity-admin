@@ -1,0 +1,45 @@
+{% extends 'temp.html' %}
+
+{% block main %} 
+
+{%load static%}
+<h3>Panding Requests</h3>
+<br>
+    <table class="table table-striped">
+        <thead style="height: 80px;color: black;">
+          <th>
+            <th scope="col">Customer id</th>  
+            <th scope="col">customization id</th>  
+            <th scope="col">name</th>
+            <th scope="col">description</th>
+            <th scope="col">size</th>
+            <th scope="col">image</th> 
+            <th scope="col">date</th>
+            <th></th>  
+           </tr>
+        </thead>
+        <tbody >{% for request in orders %}
+            <tr>
+              <td></td>
+              <td>{{ request.Cust_id }}</td>
+              <td>{{ request.customization_id }}</td>
+              <td>{{ request.c_name }}</td>
+              <td>{{ request.c_desc }}</td>
+              <td>{{ request.c_dimen }}</td>
+              <td><img src="{% static request.c_img %}" alt="{{request.c_img}}" width="50" height="50"></td>
+              <td>{{ request.c_date }}</td>
+              <!-- <td><form method="post" action="accept/{{request.customization_id}}" ><input type="number" name="total_amt" style="width: 100px; "required></td>
+              <td> <button type="submit" class="btn btn-outline-warning" href=""> Accept </button></form></td> -->
+              <td><b><a href="selacted_mat/{{request.customization_id}}">Materials</a></b></td>
+              </tr>
+         
+        {% endfor %}
+    
+        </tbody>
+        
+      </table>
+      <div class="text-center">
+      
+      
+    </div>
+{% endblock %}

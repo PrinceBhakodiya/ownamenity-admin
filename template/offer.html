@@ -10,46 +10,51 @@ view
     </script>
 {% endif %}
     <center>
-  <a  active href="{% url 'offer' %}" style="text-decoration: none;">
+  <a  active href="{% url 'add_offer' %}" style="text-decoration: none;">
   <button type="button" class="btn btn-secondary btn-sm" style="height: 50px;width: 200px;color: coral;" >
-    Add Product
+    Add offer
     <span class="bi-plus-square-fill"></span>
     <span class="bi bi-plus"></span>&nbsp;  
   </button>
   </a>
-    <table class="table table-dark" style="border-radius: 20px;">
+  <br>
+  &nbsp;
+    <table class="table table-striped" style="border-radius: 20px;">
         <thead style="height: 80px;color: coral;">
           <tr>
             <th scope="col">offer_id</th>
             <th scope="col">offer_name</th>
             <th scope="col">p_id</th>
             <th scope="col">offer_type</th>
-            <th scope="col">discount_value</th>
+            <th scope="col">percentage</th>
             <th scope="col">start_date</th>
             <th scope="col">end_date</th>
             <th scope="col">isActive</th>                        
-            <th scope="col">description</th>                        
+            <th scope="col">description</th>   
+            <th></th>                     
           </tr>
         </thead>
-        <hr>
+        
                
         <tbody >
    
         {% for detail in details %}
-        
           <tr>
             <td>{{detail.offer_id}}</td>
             <td>{{detail.offer_name}}</td>
-            <td>{{detail.p_id}}</td>
-            <!-- <td>{{detail.offer_type}}</td>  -->
-            <td>{{detail.discount_value}}</td>
+            {% for ProDetail in ProDetails %}
+            {% if detail.p_id == ProDetail.P_id %}
+            <td>{{ProDetail.P_name}}-{{ProDetail.P_id}}</td>
+            {%endif%}
+            {%endfor%}
+            <td>{{detail.offer_type}}</td>
+            <td>{{detail.discount_per}} %</td>
             <td>{{detail.start_date}}</td>
             <td>{{detail.end_date}}</td>
             <td>{{detail.isActive}}</td>
             <td>{{detail.description}}</td>
            
-            <td><a href="edit-product/{{product.P_id}}">Edit</del></a></td>
-            <td><a href="delete-product/{{product.P_id}}">Delete</del></a></td>
+            <td><a href="delete-offer/{{detail.offer_id}}">Remove</del></a></td>
         </tr>
         {%endfor%}
       </tbody>

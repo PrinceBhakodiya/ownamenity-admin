@@ -9,15 +9,17 @@
     <span class="bi bi-plus"></span>&nbsp;  
   </button>
   </a>
+  &nbsp;
     <table class="table table-striped">
         <thead style="height: 80px;color: coral;">
           <tr>
             <th scope="col">id</th>
-            <th scope="col">name</th>                    
+            <th scope="col">name</th>   
+            <th></th>                 
           </tr>
         </thead>
         <tbody>
-        <hr>
+     
         {% for category in categories %}
           <tr>
             <td>{{category.Cate_id}}</td>

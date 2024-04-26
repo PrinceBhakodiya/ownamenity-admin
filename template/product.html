@@ -16,6 +16,14 @@ view
         <span class="bi bi-plus"></span>&nbsp;
       </button>
     </a>
+    
+    &nbsp;
+    <form method="POST" action="{% url 'products' %}" style="background-color: #fff; border: 1px solid #ddd; border-radius: 5px; padding: 20px; margin-bottom: 20px;margin-top: 20px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+      {% csrf_token %}
+      <h4><label for="start_date" style=" margin-bottom: 8px;">Search Name :</label></h4>
+      <input type="text" id="search" name="search" style=" padding: 8px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px;">
+      <button type="submit" style="padding: 10px 20px; font-size: 16px; background-color: #FF7518; color: #fff; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s ease;">Search</button>
+  </form>
     <table class="table table-striped">
       <thead style="height: 80px;color: coral;">
         <tr>
@@ -34,7 +42,6 @@ view
           <th scope="col"></th>
         </tr>
       </thead>
-      <hr>
 
       <tbody>
 
@@ -46,7 +53,6 @@ view
           <td>{{product.P_curstock}}</td>
           <td>{{product.P_rating}}</td>
           <td>{{product.P_desc}}</td>
-
           {%for image in pro_img%}
           {% if image.p_id == product.P_id %}
           <td>
